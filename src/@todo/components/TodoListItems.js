@@ -13,7 +13,7 @@ const styles = () => ({
 class TodoListItem extends Component {
 	render() {
 		const { classes, list } = this.props;
-		console.log(list);
+		// console.log(list);
 		return (
 			<div className={classes.root}>
 				{list.length !== 0 && list.map(item => {
@@ -45,6 +45,7 @@ TodoListItem.defaultProps = {
 };
 
 TodoListItem.propTypes = {
+	classes: PropTypes.object,
 	list: PropTypes.array.isRequired,
 	deleteItem: PropTypes.func,
 	clickItem: PropTypes.func,

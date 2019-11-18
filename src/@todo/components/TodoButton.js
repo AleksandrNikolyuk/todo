@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
@@ -33,6 +33,14 @@ class TodoButton extends Component {
 	}
 }
 
-TodoButton.propTypes = {};
+TodoButton.propTypes = {
+	classes: PropTypes.object,
+	label: PropTypes.string,
+};
+
+TodoButton.defaultProps = {
+	classes: {},
+	label: '',
+};
 
 export default withStyles(styles)(TodoButton);
