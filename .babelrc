@@ -1,6 +1,8 @@
 {
 	"presets": [
-		"env"
+		"env",
+		"react",
+		"es2015"
 	],
 	"plugins": [
 		[
@@ -13,7 +15,8 @@
 					"@todo": "./src/@todo",
 					"store": "./src/store"
 				}
-			}
+			},
+			"react-hot-loader/babel"
 		]
 	]
 }
