@@ -7,7 +7,7 @@ const styles = () => ({
 	root: {},
 	button: {
 		height: '50px',
-		width: '150px',
+		width: '100px',
 		background: '#6495ed',
 		color: 'white',
 		float: 'right',
@@ -36,11 +36,12 @@ class TodoButton extends Component {
 TodoButton.propTypes = {
 	classes: PropTypes.object,
 	label: PropTypes.string,
+	onClick: PropTypes.func,
 };
 
 TodoButton.defaultProps = {
 	classes: {},
-	label: '',
+	label: 'ADD',
 };
 
-export default withStyles(styles)(TodoButton);
+export default withStyles(styles, { withTheme: true })(TodoButton);

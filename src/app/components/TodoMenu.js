@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { TodoLang } from '@todo';
+import TodoLang from 'app/components/TodoLang';
 
 const styles = () => ({
 	root: {
@@ -30,10 +30,11 @@ class TodoMenu extends Component {
 
 TodoMenu.propTypes = {
 	title: PropTypes.string,
+	classes: PropTypes.object,
 };
 
 TodoMenu.defaultProps = {
-	title: '',
+	title: 'TODO',
 };
 
 export default withStyles(styles)(TodoMenu);

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { TodoButton, TodoImage } from '@todo';
+import { TodoButton, TodoImage, TodoTextfield } from '@todo';
 
 const styles = () => ({
-	box: {
+	root: {
 		width: '35%',
 		padding: '20px',
 		margin: '50px 50px 50px 0',
@@ -20,27 +19,18 @@ const styles = () => ({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 	},
-	textField: {
-		width: '100%',
-	},
 });
 
 class TodoComments extends Component {
 	render() {
-		const { classes } = this.props;
+		const { classes, label, rows } = this.props;
 		return (
-			<div className={classes.box}>
-				<h1>Comments</h1>
+			<div className={classes.root}>
+				<h1>{label}</h1>
 				<div className={classes.commentBlock}>
 					<TodoImage/>
-					<TextField
-						multiline
-						id="outlined-basic"
-						className={classes.textField}
-						label="Comment"
-                        margin="normal"
-                        variant="outlined"
-                        rows="4"
+					<TodoTextfield
+						rows={"4"}
 					/>
 				</div>
 				<TodoButton/>
@@ -49,6 +39,13 @@ class TodoComments extends Component {
 	}
 }
 
-TodoComments.propTypes = {};
+TodoComments.propTypes = {
+	classes: PropTypes.object
+};
 
-export default withStyles(styles)(TodoComments);
+TodoComments.defaultProps = {
+	classes: {},
+	label: 'Comments',
+};
+
+export default withStyles(styles, { withTheme: true })(TodoComments);

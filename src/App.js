@@ -1,5 +1,5 @@
 import React from 'react';
-import { TodoLayout } from '@todo';
+import TodoLayout from 'app/components/TodoLayout';
 import store from './store';
 import { Provider } from 'react-redux';
 
@@ -12,6 +12,3 @@ function App() {
 }
 
 export default App;
-
-
-

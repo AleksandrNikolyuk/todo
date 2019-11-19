@@ -13,27 +13,24 @@ const styles = () => ({
 class TodoListItem extends Component {
 	render() {
 		const { classes, list } = this.props;
-		// console.log(list);
 		return (
 			<div className={classes.root}>
-				{list.length !== 0 && list.map(item => {
+				{/* {list.length !== 0 && list.map(item => { */}
 					{/* {list[0] && list.map(item => { */
 					}
-					return (
-						<div className={classes.list} key={item.id}>
+					{/* return ( */}
+						<div className={classes.list}>
 							<div className={classes.item}>
-								<div className={classes.title}>{item.title}</div>
-								<span>
-                                        {item.comments.length}
-                                    </span>
+								<div className={classes.title}></div>
+								
 								<TodoButton
 									label={'Delete'}
 									onClick={() => ({})}
 								/>
 							</div>
 						</div>
-					);
-				})}
+					{/* ); */}
+			
 			</div>
 		);
 	}
@@ -51,4 +48,4 @@ TodoListItem.propTypes = {
 	clickItem: PropTypes.func,
 };
 
-export default withStyles(styles)(TodoListItem);
+export default withStyles(styles, { withTheme: true })(TodoListItem);

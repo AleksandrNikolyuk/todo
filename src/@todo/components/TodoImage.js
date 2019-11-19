@@ -1,9 +1,9 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = () => ({
-	foto: {
+	root: {
 		width: '52px',
 		height: '52px',
 		marginRight: '14px',
@@ -15,11 +15,14 @@ const styles = () => ({
 function TodoImage(props) {
 	const { classes } = props;
 	return (
-		<div className={classes.foto}>
+		<div className={classes.root}>
+
 		</div>
 	);
 }
 
-TodoImage.propTypes = {};
+TodoImage.propTypes = {
+	classes: PropTypes.object,
+};
 
-export default withStyles(styles)(TodoImage);
+export default withStyles(styles,{ withTheme: true })(TodoImage);

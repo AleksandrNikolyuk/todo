@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { TodoButton } from '@todo';
+import { TodoButton, TodoTextfield } from '@todo';
+import { withTranslation } from "react-i18next";
 
 const styles = () => ({
-	box: {
+	root: {
 		padding: '20px',
 		margin: '10px',
 		display: 'flex',
@@ -19,28 +19,26 @@ const styles = () => ({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 	},
-	textField: {
-		width: 430,
-	},
 });
 
 class TodoItem extends Component {
+	
+	handleSubmitItem = () => {
+		const { addItem } = this.props;
+		const { newitem } = this.state;
+		// addItem([ { title: newitem, id: '1', comments: [] } ]);
+		this.setState({ newitem: '' });
+	};
 
 	render() {
-
-		const { classes, value, onChange, handleSubmitItem, list } = this.props;
+		const {t, i18n, classes, label } = this.props;
+		const { handleSubmitItem } = this
 		return (
-			<div className={classes.box}>
-				<h1>Item</h1>
+			<div className={classes.root}>
+				<h1>{label}</h1>
 				<div className={classes.inputBlock}>
-					<TextField
-						id="outlined-basic"
-						className={classes.textField}
-						label="User name"
-						margin="normal"
-						variant="outlined"
-						onChange={e => onChange(e.target.value)}
-						value={value}
+					<TodoTextfield
+						// label={ t("user") }
 					/>
 					<TodoButton
 						onClick={() => handleSubmitItem(console.log('bla bla bla'))}
@@ -54,13 +52,15 @@ class TodoItem extends Component {
 TodoItem.defaultProps = {
 	onClick: null,
 	onChange: null,
-	value: '1',
+	value: '',
+	label: 'Item'
 };
 
 TodoItem.propTypes = {
 	onClick: PropTypes.func,
 	onChange: PropTypes.func,
 	value: PropTypes.string,
+	classes: PropTypes.object,
 };
 
-export default withStyles(styles)(TodoItem);
+export default withStyles(styles, { withTheme: true })(TodoItem);

@@ -1,4 +1,4 @@
-import { ADD_ITEM } from '@todo/store/action/types';
+import { ADD_ITEM } from './types';
 
 export const addItem = data => (dispatch) => {
 	dispatch({

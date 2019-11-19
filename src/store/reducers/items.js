@@ -1,6 +1,6 @@
 import {
 	ADD_ITEM,
-} from '@todo/store/action/types';
+} from 'store/action/types';
 
 const initialState = {
 	list: [],

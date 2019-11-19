@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { TodoItem, TodoListItem } from '@todo';
+import TodoItem from 'app/components/TodoItem';
+import { connect } from 'react-redux';
+import TodoListItem from 'app/components/TodoListItem';
 
 const styles = () => ({
 	root: {
@@ -17,23 +19,34 @@ const styles = () => ({
 });
 
 class TodoItemsContainer extends Component {
+
+	state = {
+		newitem: '',
+	};
+
+	handleAddItem = value => {
+		console.log(value);
+		this.setState({ newitem: value });
+	};
+
 	render() {
 		const {
 			classes,
-			handleSubmitItem,
 			onChange,
-			list,
-			newitem,
+			// list,
 		} = this.props;
+		const {newitem} = this.state
+		const { handleAddItem } = this
+		// const { list } = this.props.todos;
 		return (
 			<div className={classes.root}>
 				<TodoItem
+					onClick={handleAddItem}
 					onChange={onChange}
-					onClick={handleSubmitItem}
 					value={newitem}
 				/>
 				<TodoListItem
-					list={list}
+					// list={list}
 				/>
 			</div>
 		);
@@ -51,6 +64,15 @@ TodoItemsContainer.propTypes = {
 	onChange: PropTypes.func,
 	list: PropTypes.array.isRequired,
 	newitem: PropTypes.string,
+	classes: PropTypes.object,
 };
 
-export default withStyles(styles)(TodoItemsContainer);
+const mapStateToProps = state => ({
+	todos: state.todos,
+});
+
+const mapDispatchToProps = dispatch => ({ 
+	// addItem 
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(TodoItemsContainer));
