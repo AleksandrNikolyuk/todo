@@ -30,7 +30,6 @@ class TodoItem extends Component {
 	};
 
 	handleAddItem = e => {
-		console.log(e);
 		this.setState({ newitem: e.target.value });
 	};
 
@@ -44,6 +43,10 @@ class TodoItem extends Component {
 		const {newitem} = this.state
 		const {t, classes, label, clickHandler, add_item } = this.props;
 		const { handleSubmitItem, handleAddItem } = this
+
+		// const { list } = this.props.todos;
+		// console.log('1', list)
+
 		return (
 			<div className={classes.root}>
 				<h1>{t('items')}</h1>

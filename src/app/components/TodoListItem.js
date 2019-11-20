@@ -4,35 +4,54 @@ import { withStyles } from '@material-ui/core/styles';
 import { TodoButton } from '@todo';
 import { withTranslation } from "react-i18next";
 
+import { connect } from 'react-redux';
+
 const styles = () => ({
-	root: {},
-	list: {},
-	item: {},
-	title: {},
+	root: {
+		// width: 'auto',
+		// display: 'flex',
+		// flexDirection: 'column',
+	},
+	list: {
+		width: 'auto',
+		display: 'flex',
+		paddingBottom: '10px',
+		marginBottom: '10px',
+		flexDirection: 'column',
+		borderBottom: '2px solid #eee',
+	},
+	item: {
+		display: 'flex',
+		alignItems: 'flex-end',
+		justifyContent: 'space-between'
+	},
+	title: {
+		fontSize: '20px',
+	},
 });
 
 class TodoListItem extends Component {
 	render() {
-		const { classes, list, t } = this.props;
+		const { classes, t } = this.props;
+		const { list } = this.props.todos;
+
 		return (
-			<div className={classes.root}>
-				{/* {list.length !== 0 && list.map(item => { */}
-					{/* {list[0] && list.map(item => { */
-					}
-					{/* return ( */}
-						<div className={classes.list}>
+			<ul className={classes.root}>
+				{list.length !== 0 && list.map(item => {
+					return (
+						<li className={classes.list} key={item.id}>
 							<div className={classes.item}>
-								<div className={classes.title}></div>
+								<div className={classes.title} >{item.title}</div>
 								
 								<TodoButton
 									label={t('buttons.delete')}
 									onClick={() => ({})}
 								/>
 							</div>
-						</div>
-					{/* ); */}
-			
-			</div>
+						</li>
+					);
+				})}
+			</ul>
 		);
 	}
 }
@@ -43,7 +62,21 @@ TodoListItem.defaultProps = {
 
 TodoListItem.propTypes = {
 	classes: PropTypes.object,
-	// list: PropTypes.array.isRequired,
+	list: PropTypes.array,
 };
 
-export default withTranslation() (withStyles(styles, { withTheme: true })(TodoListItem));
+
+const mapStateToProps = state => ({
+	todos: state.todos,
+});
+
+const mapDispatchToProps = dispatch => ({ 
+	// add_item: (data) => () => {
+	// 	dispatch(addItem(data))
+	// }
+});
+
+
+// export default withTranslation() (withStyles(styles, { withTheme: true })(TodoListItem));
+
+export default connect(mapStateToProps, mapDispatchToProps) (withTranslation()(withStyles(styles, { withTheme: true })(TodoListItem)));

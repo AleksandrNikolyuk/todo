@@ -27,18 +27,11 @@ class TodoItemsContainer extends Component {
 	// };
 
 	render() {
-		const {
-			classes,
-			// list,
-		} = this.props;
-		
-		// const { list } = this.props.todos;
+		const { classes } = this.props;
 		return (
 			<div className={classes.root}>
 				<TodoItem/>
-				<TodoListItem
-					// list={list}
-				/>
+				<TodoListItem/>
 			</div>
 		);
 	}
@@ -49,10 +42,6 @@ TodoItemsContainer.defaultProps = {
 }
 
 TodoItemsContainer.propTypes = {
-	handleSubmitItem: PropTypes.func,
-	onChange: PropTypes.func,
-	// list: PropTypes.array.isRequired,
-	newitem: PropTypes.string,
 	classes: PropTypes.object,
 };
 

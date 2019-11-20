@@ -6,7 +6,8 @@ export const addItem = data => (dispatch) => {
 		type: ADD_ITEM,
 		payload: {
 			id: uniqid(),
-			title: data
+			title: data,
+			comments: []
 		},
 	});
 };
