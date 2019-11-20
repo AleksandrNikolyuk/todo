@@ -4,7 +4,7 @@ import {
 
 const initialState = {
 	list: [],
-	selectedItem: null,
+	// selectedItem: null,
 };
 
 export default (state = initialState, action) => {
@@ -12,10 +12,9 @@ export default (state = initialState, action) => {
 		case ADD_ITEM:
 			return {
 				...state,
-				list: [ ...state.list, ...action.payload ],
-				selectedItem: action.payload[0].id,
+				list: [ ...state.list, action.payload ],
+				// selectedItem: action.payload[0].id,
 			};
-
 		default:
 			return state;
 	}

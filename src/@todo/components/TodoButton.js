@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
+
 const styles = () => ({
 	root: {},
 	button: {
@@ -16,14 +17,13 @@ const styles = () => ({
 
 class TodoButton extends Component {
 	render() {
-		const { classes, label } = this.props;
+		const { classes, label, clickHandler } = this.props;
 		return (
 			<div className={classes.root}>
 				<Button
 					variant={'outlined'}
 					color={'secondary'}
-					onClick={() => {
-					}}
+					onClick={clickHandler}
 					className={classes.button}
 				>
 					{label}
@@ -41,7 +41,7 @@ TodoButton.propTypes = {
 
 TodoButton.defaultProps = {
 	classes: {},
-	label: 'ADD',
+	label: '',
 };
 
 export default withStyles(styles, { withTheme: true })(TodoButton);

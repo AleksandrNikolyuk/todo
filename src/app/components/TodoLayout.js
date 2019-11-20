@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
 import  TodoComments from 'app/components/TodoComments';
 import  TodoMenu from 'app/components/TodoMenu';
 import  TodoItemsContainer from 'app/components/TodoItemsContainer';
 import { withStyles } from '@material-ui/core/styles';
-// import 
-// 	addItem
-//  from './store/action/actions.payload';
+
 
 const styles = () => ({
 	root: {
@@ -34,8 +31,7 @@ class TodoLayout extends Component {
 }
 
 TodoLayout.propTypes = {
-	onClick: PropTypes.func,
-	onChange: PropTypes.func,
+	classes: PropTypes.object,
 };
 
 export default withStyles(styles, { withTheme: true })(TodoLayout);

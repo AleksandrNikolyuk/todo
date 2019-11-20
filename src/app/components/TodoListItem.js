@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { TodoButton } from '@todo';
+import { withTranslation } from "react-i18next";
 
 const styles = () => ({
 	root: {},
@@ -12,7 +13,7 @@ const styles = () => ({
 
 class TodoListItem extends Component {
 	render() {
-		const { classes, list } = this.props;
+		const { classes, list, t } = this.props;
 		return (
 			<div className={classes.root}>
 				{/* {list.length !== 0 && list.map(item => { */}
@@ -24,7 +25,7 @@ class TodoListItem extends Component {
 								<div className={classes.title}></div>
 								
 								<TodoButton
-									label={'Delete'}
+									label={t('buttons.delete')}
 									onClick={() => ({})}
 								/>
 							</div>
@@ -37,15 +38,12 @@ class TodoListItem extends Component {
 }
 
 TodoListItem.defaultProps = {
-	deleteItem: null,
-	clickItem: null,
+	classes: {}
 };
 
 TodoListItem.propTypes = {
 	classes: PropTypes.object,
-	list: PropTypes.array.isRequired,
-	deleteItem: PropTypes.func,
-	clickItem: PropTypes.func,
+	// list: PropTypes.array.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(TodoListItem);
+export default withTranslation() (withStyles(styles, { withTheme: true })(TodoListItem));

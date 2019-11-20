@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TodoLang from 'app/components/TodoLang';
+import { withTranslation } from "react-i18next";
 
 const styles = () => ({
 	root: {
@@ -18,23 +19,22 @@ const styles = () => ({
 
 class TodoMenu extends Component {
 	render() {
-		const { classes, title } = this.props;
+		const { classes, t } = this.props;
 		return (
 			<div className={classes.root}>
-				<h1>{title}</h1>
+				<h1>{t('title')}</h1>
 				<TodoLang/>
 			</div>
 		);
 	}
 }
 
+TodoMenu.defaultProps = {
+	classes: {},
+};
+
 TodoMenu.propTypes = {
-	title: PropTypes.string,
 	classes: PropTypes.object,
 };
 
-TodoMenu.defaultProps = {
-	title: 'TODO',
-};
-
-export default withStyles(styles)(TodoMenu);
+export default withTranslation() (withStyles(styles)(TodoMenu));

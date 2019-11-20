@@ -11,7 +11,7 @@ const styles = () => ({
 
 class TodoTextfield extends Component {
 	render() {
-		const { classes, label, rows } = this.props;
+		const { classes, label, rows, value, handler } = this.props;
 		return (
 			<div>
 				<TextField
@@ -22,6 +22,8 @@ class TodoTextfield extends Component {
                     margin={"normal"}
                     variant={"outlined"}
                     rows={rows}
+					value={value}
+					onChange={handler}
 				/>
 			</div>
 		);

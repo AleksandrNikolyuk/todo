@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { TodoButton, TodoTextfield } from '@todo';
 import { withTranslation } from "react-i18next";
+import { connect } from 'react-redux';
+import { addItem } from 'store/action/actions.payload';
 
 const styles = () => ({
 	root: {
@@ -22,26 +24,38 @@ const styles = () => ({
 });
 
 class TodoItem extends Component {
-	
-	handleSubmitItem = () => {
-		const { addItem } = this.props;
-		const { newitem } = this.state;
-		// addItem([ { title: newitem, id: '1', comments: [] } ]);
-		this.setState({ newitem: '' });
+
+	state = {
+		newitem: '',
 	};
 
+	handleAddItem = e => {
+		console.log(e);
+		this.setState({ newitem: e.target.value });
+	};
+
+	// handleSubmitItem = () => {
+	// 	const { addItem, clickHandler } = this.props;
+	// 	// addItem([ { title: newitem, id: {key}, comments: [] } ]);
+	// 	this.setState({ newitem: '' });
+	// };
+
 	render() {
-		const {t, i18n, classes, label } = this.props;
-		const { handleSubmitItem } = this
+		const {newitem} = this.state
+		const {t, classes, label, clickHandler, add_item } = this.props;
+		const { handleSubmitItem, handleAddItem } = this
 		return (
 			<div className={classes.root}>
-				<h1>{label}</h1>
+				<h1>{t('items')}</h1>
 				<div className={classes.inputBlock}>
 					<TodoTextfield
-						// label={ t("user") }
+						value={newitem}
+						handler={handleAddItem}
+						label={ t("user") }
 					/>
 					<TodoButton
-						onClick={() => handleSubmitItem(console.log('bla bla bla'))}
+						label={t('buttons.addNew')}
+						clickHandler={add_item(newitem)}
 					/>
 				</div>
 			</div>
@@ -50,17 +64,23 @@ class TodoItem extends Component {
 }
 
 TodoItem.defaultProps = {
-	onClick: null,
-	onChange: null,
 	value: '',
-	label: 'Item'
 };
 
 TodoItem.propTypes = {
-	onClick: PropTypes.func,
-	onChange: PropTypes.func,
+	handler: PropTypes.func,
 	value: PropTypes.string,
 	classes: PropTypes.object,
 };
 
-export default withStyles(styles, { withTheme: true })(TodoItem);
+const mapStateToProps = state => ({
+	todos: state.todos,
+});
+
+const mapDispatchToProps = dispatch => ({ 
+	add_item: (data) => () => {
+		dispatch(addItem(data))
+	}
+});
+
+export default connect(mapStateToProps, mapDispatchToProps) (withTranslation()(withStyles(styles, { withTheme: true })(TodoItem)));

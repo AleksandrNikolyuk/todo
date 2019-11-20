@@ -5,7 +5,7 @@ import rootReducer from 'store/reducers/index';
 
 // const initialState = {}
 
-const composeEnhancers = window.REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
+const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const middleware = applyMiddleware(logger, thunk);
 
