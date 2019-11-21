@@ -33,19 +33,10 @@ class TodoItem extends Component {
 		this.setState({ newitem: e.target.value });
 	};
 
-	// handleSubmitItem = () => {
-	// 	const { addItem, clickHandler } = this.props;
-	// 	// addItem([ { title: newitem, id: {key}, comments: [] } ]);
-	// 	this.setState({ newitem: '' });
-	// };
-
 	render() {
 		const {newitem} = this.state
-		const {t, classes, label, clickHandler, add_item } = this.props;
-		const { handleSubmitItem, handleAddItem } = this
-
-		// const { list } = this.props.todos;
-		// console.log('1', list)
+		const {t, classes, add_item } = this.props;
+		const {  handleAddItem } = this
 
 		return (
 			<div className={classes.root}>

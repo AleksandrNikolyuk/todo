@@ -1,5 +1,6 @@
 import {
 	ADD_ITEM,
+	DELETE_ITEM,
 } from 'store/action/types';
 
 const initialState = {
@@ -15,6 +16,13 @@ export default (state = initialState, action) => {
 				list: [ ...state.list, action.payload ],
 				// selectedItem: action.payload[0].id,
 			};
+		case DELETE_ITEM: {
+			console.log(action)
+			return {
+				...state,
+				list: state.list.filter(item => item.id !== action.payload)
+			}
+		}
 		default:
 			return state;
 	}

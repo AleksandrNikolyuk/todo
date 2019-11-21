@@ -1,4 +1,4 @@
-import { ADD_ITEM } from './types';
+import { ADD_ITEM, DELETE_ITEM } from './types';
 import uniqid from 'uniqid';
 
 export const addItem = data => (dispatch) => {
@@ -9,5 +9,12 @@ export const addItem = data => (dispatch) => {
 			title: data,
 			comments: []
 		},
+	});
+};
+
+export const deletItem = id => (dispatch) => {
+	dispatch ({
+		type: DELETE_ITEM,
+		payload: id
 	});
 };
