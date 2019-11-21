@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-
+import {
+	withStyles,
+	Button,
+} from '@material-ui/core';
 
 const styles = () => ({
 	root: {},
@@ -36,12 +37,14 @@ class TodoButton extends Component {
 TodoButton.propTypes = {
 	classes: PropTypes.object,
 	label: PropTypes.string,
-	onClick: PropTypes.func,
+	clickHandler: PropTypes.func,
 };
 
 TodoButton.defaultProps = {
 	classes: {},
 	label: '',
+	clickHandler: () => {
+	},
 };
 
 export default withStyles(styles, { withTheme: true })(TodoButton);

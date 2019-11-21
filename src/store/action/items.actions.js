@@ -1,20 +1,22 @@
-import { ADD_ITEM, DELETE_ITEM } from './types';
+import * as Actions from './index';
 import uniqid from 'uniqid';
 
 export const addItem = data => (dispatch) => {
 	dispatch({
-		type: ADD_ITEM,
+		type: Actions.ADD_ITEM,
 		payload: {
 			id: uniqid(),
 			title: data,
-			comments: []
+			comments: [],
 		},
 	});
 };
 
 export const deletItem = id => (dispatch) => {
-	dispatch ({
-		type: DELETE_ITEM,
-		payload: id
+	dispatch({
+		type: Actions.DELETE_ITEM,
+		payload: {
+			id,
+		},
 	});
 };

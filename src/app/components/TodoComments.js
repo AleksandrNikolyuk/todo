@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import { TodoButton, TodoImage, TodoTextfield } from '@todo';
-import { withTranslation } from "react-i18next";
+import { withTranslation } from 'react-i18next';
+import { withStyles } from '@material-ui/core';
+import {
+	TodoButton,
+	TodoImage,
+	TodoTextfield,
+} from '@todo';
 
 const styles = () => ({
 	root: {
@@ -31,8 +35,7 @@ class TodoComments extends Component {
 				<div className={classes.commentBlock}>
 					<TodoImage/>
 					<TodoTextfield
-						label={ t("comments") }
-						rows={"4"}
+						label={t('comments')}
 					/>
 				</div>
 				<TodoButton
@@ -44,11 +47,12 @@ class TodoComments extends Component {
 }
 
 TodoComments.propTypes = {
-	classes: PropTypes.object
+	classes: PropTypes.object,
+	t: PropTypes.func,
 };
 
 TodoComments.defaultProps = {
 	classes: {},
 };
 
-export default withTranslation() (withStyles(styles, { withTheme: true })(TodoComments));
+export default withTranslation()(withStyles(styles, { withTheme: true })(TodoComments));

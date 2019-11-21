@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TodoLang from 'app/components/TodoLang';
-import { withTranslation } from "react-i18next";
+import { withTranslation } from 'react-i18next';
 
 const styles = () => ({
 	root: {
@@ -35,6 +35,7 @@ TodoMenu.defaultProps = {
 
 TodoMenu.propTypes = {
 	classes: PropTypes.object,
+	t: PropTypes.func,
 };
 
-export default withTranslation() (withStyles(styles)(TodoMenu));
+export default withTranslation()(withStyles(styles)(TodoMenu));

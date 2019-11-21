@@ -20,12 +20,6 @@ const styles = () => ({
 
 class TodoItemsContainer extends Component {
 
-	// static defaultProps = {
-	// 	handleSubmitItem: null,
-	// 	onChange: null,
-	// 	newitem: '123',
-	// };
-
 	render() {
 		const { classes } = this.props;
 		return (
@@ -37,14 +31,10 @@ class TodoItemsContainer extends Component {
 	}
 }
 
-TodoItemsContainer.defaultProps = {
-	newitem: '',
-}
+TodoItemsContainer.defaultProps = {};
 
 TodoItemsContainer.propTypes = {
 	classes: PropTypes.object,
 };
-
-
 
 export default withStyles(styles, { withTheme: true })(TodoItemsContainer);

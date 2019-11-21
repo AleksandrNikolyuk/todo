@@ -1,7 +1,7 @@
 import {
 	ADD_ITEM,
 	DELETE_ITEM,
-} from 'store/action/types';
+} from 'store/action';
 
 const initialState = {
 	list: [],
@@ -13,15 +13,18 @@ export default (state = initialState, action) => {
 		case ADD_ITEM:
 			return {
 				...state,
-				list: [ ...state.list, action.payload ],
+				list: [
+					...state.list,
+					action.payload,
+				],
 				// selectedItem: action.payload[0].id,
 			};
 		case DELETE_ITEM: {
-			console.log(action)
+			console.log(action);
 			return {
 				...state,
-				list: state.list.filter(item => item.id !== action.payload)
-			}
+				list: state.list.filter(item => item.id !== action.payload.id),
+			};
 		}
 		default:
 			return state;

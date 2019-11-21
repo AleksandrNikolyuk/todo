@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withTranslation } from "react-i18next";
+import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
-import i18n from 'i18n'
+import i18n from 'i18n';
 import {
 	InputLabel,
 	FormControl,
@@ -15,12 +15,11 @@ const styles = () => ({
 	},
 });
 
-
 class TodoLang extends Component {
 
 	handleChange = (e) => {
-		i18n.changeLanguage(e.target.value)
-	}
+		i18n.changeLanguage(e.target.value);
+	};
 
 	render() {
 		const { classes, t } = this.props;
@@ -36,8 +35,8 @@ class TodoLang extends Component {
 					onChange={this.handleChange}
 				>
 					<option value=""/>
-					<option value={"en"}>English</option>
-					<option value={"ru"}>Russian</option>
+					<option value={'en'}>{t('English')}</option>
+					<option value={'ru'}>{t('Russian')}</option>
 				</Select>
 			</FormControl>
 		);
@@ -45,13 +44,14 @@ class TodoLang extends Component {
 }
 
 TodoLang.defaultProps = {
-	classes: {}
-}
+	classes: {},
+};
 
 TodoLang.propTypes = {
 	classes: PropTypes.object,
+	t: PropTypes.func,
 	inputProps: PropTypes.object,
 	onCklick: PropTypes.func,
 };
 
-export default withTranslation() (withStyles(styles, { withTheme: true })(TodoLang));
+export default withTranslation()(withStyles(styles, { withTheme: true })(TodoLang));

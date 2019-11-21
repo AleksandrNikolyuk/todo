@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { TodoDelButton } from '@todo';
-import { withTranslation } from "react-i18next";
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { deletItem } from 'store/action/actions.payload';
 
@@ -19,7 +19,7 @@ const styles = () => ({
 	item: {
 		display: 'flex',
 		alignItems: 'flex-end',
-		justifyContent: 'space-between'
+		justifyContent: 'space-between',
 	},
 	title: {
 		fontSize: '20px',
@@ -29,29 +29,35 @@ const styles = () => ({
 class TodoListItem extends Component {
 	render() {
 		const { t, classes, delet_item } = this.props;
-		const { list } = this.props.todos;
+		const { list } = this.props;
 		return (
 			<ul className={classes.root}>
-				{list.length !== 0 && list.map(item => {
-					return (
-						<li className={classes.list} key={item.id}>
-							<div className={classes.item}>
-								<div className={classes.title} >{item.title}</div>
-								<TodoDelButton
-									label={t('buttons.delete')}
-									clickHandler={delet_item(item.id)}
-								/>
-							</div>
-						</li>
-					);
-				})}
+				{
+					list.length !== 0 && (
+						list.map(item => {
+							return (
+								<li className={classes.list} key={item.id}>
+									<div className={classes.item}>
+										<div className={classes.title}>{item.title}</div>
+										<TodoDelButton
+											label={t('buttons.delete')}
+											clickHandler={delet_item(item.id)}
+										/>
+									</div>
+								</li>
+							);
+
+						})
+					)
+				}
 			</ul>
 		);
 	}
 }
 
 TodoListItem.defaultProps = {
-	classes: {}
+	classes: {},
+	list: [],
 };
 
 TodoListItem.propTypes = {
@@ -59,16 +65,15 @@ TodoListItem.propTypes = {
 	list: PropTypes.array,
 };
 
-
 const mapStateToProps = state => ({
-	todos: state.todos,
+	...state.todos,
 });
 
-const mapDispatchToProps = dispatch => ({ 
+const mapDispatchToProps = dispatch => ({
 
 	delet_item: (id) => () => {
-		dispatch(deletItem(id))
-	}
+		dispatch(deletItem(id));
+	},
 });
 
-export default connect(mapStateToProps, mapDispatchToProps) (withTranslation()(withStyles(styles, { withTheme: true })(TodoListItem)));
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(withStyles(styles, { withTheme: true })(TodoListItem)));

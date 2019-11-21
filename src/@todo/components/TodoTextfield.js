@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import {
+	withStyles,
+	TextField,
+} from '@material-ui/core';
 
 const styles = () => ({
 	root: {
-        width: '430px',
-    },
+		width: '430px',
+	},
 });
 
 class TodoTextfield extends Component {
 	render() {
-		const { classes, label, rows, value, handler } = this.props;
+		const { classes, label, rows, value, handlerChange } = this.props;
 		return (
 			<div>
 				<TextField
-                    className={classes.root}
+					className={classes.root}
 					multiline
-                    id={"outlined-basic"}
-                    label={label}
-                    margin={"normal"}
-                    variant={"outlined"}
-                    rows={rows}
+					id={'outlined-basic'}
+					label={label}
+					margin={'normal'}
+					variant={'outlined'}
+					rows={rows}
 					value={value}
-					onChange={handler}
+					onChange={handlerChange}
 				/>
 			</div>
 		);
@@ -32,11 +34,19 @@ class TodoTextfield extends Component {
 
 TodoTextfield.propTypes = {
 	classes: PropTypes.object,
+	rows: PropTypes.number,
+	label: PropTypes.string,
+	value: PropTypes.string,
+	handlerChange: PropTypes.func,
 };
 
 TodoTextfield.defaultProps = {
 	classes: {},
-	label: "Comments",
+	handlerChange: () => {
+	},
+	label: '',
+	value: '',
+	row: 4,
 };
 
 export default withStyles(styles, { withTheme: true })(TodoTextfield);

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { TodoButton, TodoTextfield } from '@todo';
-import { withTranslation } from "react-i18next";
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { addItem } from 'store/action/actions.payload';
+import {
+	TodoButton,
+	TodoTextfield,
+} from '@todo';
+import { addItem } from 'store/action';
 
 const styles = () => ({
 	root: {
@@ -26,30 +29,30 @@ const styles = () => ({
 class TodoItem extends Component {
 
 	state = {
-		newitem: '',
+		newItem: '',
 	};
 
 	handleAddItem = e => {
-		this.setState({ newitem: e.target.value });
+		this.setState({ newItem: e.target.value });
 	};
 
 	render() {
-		const {newitem} = this.state
-		const {t, classes, add_item } = this.props;
-		const {  handleAddItem } = this
+		const { newItem } = this.state;
+		const { t, classes, addItem } = this.props;
+		const { handleAddItem } = this;
 
 		return (
 			<div className={classes.root}>
 				<h1>{t('items')}</h1>
 				<div className={classes.inputBlock}>
 					<TodoTextfield
-						value={newitem}
-						handler={handleAddItem}
-						label={ t("user") }
+						value={newItem}
+						handlerChange={handleAddItem}
+						label={t('user')}
 					/>
 					<TodoButton
 						label={t('buttons.addNew')}
-						clickHandler={add_item(newitem)}
+						clickHandler={addItem(newItem)}
 					/>
 				</div>
 			</div>
@@ -59,22 +62,26 @@ class TodoItem extends Component {
 
 TodoItem.defaultProps = {
 	value: '',
+	addItem: () => {
+	},
 };
 
 TodoItem.propTypes = {
 	handler: PropTypes.func,
+	t: PropTypes.func,
 	value: PropTypes.string,
 	classes: PropTypes.object,
+	addItem: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
 	todos: state.todos,
 });
 
-const mapDispatchToProps = dispatch => ({ 
-	add_item: (data) => () => {
-		dispatch(addItem(data))
-	}
+const mapDispatchToProps = dispatch => ({
+	addItem: (data) => () => {
+		dispatch(addItem(data));
+	},
 });
 
-export default connect(mapStateToProps, mapDispatchToProps) (withTranslation()(withStyles(styles, { withTheme: true })(TodoItem)));
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(withStyles(styles, { withTheme: true })(TodoItem)));
