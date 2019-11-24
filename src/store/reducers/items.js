@@ -1,11 +1,12 @@
 import {
 	ADD_ITEM,
 	DELETE_ITEM,
+	CHANGE_SELECTED_ITEM,
 } from 'store/action';
 
 const initialState = {
 	list: [],
-	// selectedItem: null,
+	selectedItem: null,
 };
 
 export default (state = initialState, action) => {
@@ -25,6 +26,12 @@ export default (state = initialState, action) => {
 				...state,
 				list: state.list.filter(item => item.id !== action.payload.id),
 			};
+		}
+		case CHANGE_SELECTED_ITEM: {
+			return {
+				...state,
+				selectedItem: action.payload
+			  };
 		}
 		default:
 			return state;

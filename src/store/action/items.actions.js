@@ -20,3 +20,10 @@ export const deletItem = id => (dispatch) => {
 		},
 	});
 };
+
+export const changeItem = id => (dispatch) => {
+	dispatch ({
+		type: Actions.CHANGE_SELECTED_ITEM,
+		payload: id
+	});
+};

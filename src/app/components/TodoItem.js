@@ -37,9 +37,9 @@ class TodoItem extends Component {
 	};
 
 	render() {
-		const { newItem } = this.state;
-		const { t, classes, addItem } = this.props;
-		const { handleAddItem } = this;
+		const {newItem} = this.state
+		const {t, classes, addItem } = this.props;
+		const {  handleAddItem,  } = this
 
 		return (
 			<div className={classes.root}>
