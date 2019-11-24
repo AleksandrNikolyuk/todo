@@ -45,6 +45,7 @@ class TodoLang extends Component {
 
 TodoLang.defaultProps = {
 	classes: {},
+	t: '',
 };
 
 TodoLang.propTypes = {

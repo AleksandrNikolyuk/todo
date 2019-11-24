@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import TodoLang from 'app/components/TodoLang';
 import { withTranslation } from 'react-i18next';
+import TodoLang from 'app/components/TodoLang';
+
 
 const styles = () => ({
 	root: {

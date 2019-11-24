@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { TodoDelButton } from '@todo';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { deletItem, changeItem } from 'store/action';
+import { 
+	deletItem, 
+	changeItem 
+} from 'store/action';
+import { TodoDelButton } from '@todo';
 
 const styles = () => ({
 	root: {},
@@ -35,7 +38,6 @@ const styles = () => ({
 class TodoListItem extends Component {
 	render() {
 		const { t, classes, deletItem, changeItem, list, selectedItem  } = this.props;
-		// const { list, selectedItem } = this.props;
 			
 		return (
 			<ul className={classes.root} >
@@ -65,11 +67,22 @@ class TodoListItem extends Component {
 TodoListItem.defaultProps = {
 	classes: {},
 	list: [],
+	selectedItem: '',
+	deletItem: () => {
+	},
+	changeItem: () => {
+	},
+	
 };
 
 TodoListItem.propTypes = {
 	classes: PropTypes.object,
 	list: PropTypes.array,
+	selectedItem: PropTypes.string,
+	clickHandler: PropTypes.func,
+	t: PropTypes.func,
+	deletItem: PropTypes.func,
+	changeItem: PropTypes.func,
 };
 
 const mapStateToProps = state => ({

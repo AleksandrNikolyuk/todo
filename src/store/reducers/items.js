@@ -18,7 +18,6 @@ export default (state = initialState, action) => {
 					...state.list,
 					action.payload,
 				],
-				// selectedItem: action.payload[0].id,
 			};
 		case DELETE_ITEM: {
 			console.log(action);
