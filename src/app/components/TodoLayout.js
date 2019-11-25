@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { default as TodoCommentsContainer } from 'app/components/TodoComments';
+import { withStyles } from '@material-ui/core';
+import TodoCommentsContainer from 'app/components/TodoCommentsContainer';
 import TodoMenu from 'app/components/TodoMenu';
 import TodoItemsContainer from 'app/components/TodoItemsContainer';
-import { withStyles } from '@material-ui/core/styles';
+
 
 const styles = () => ({
 	root: {

@@ -36,10 +36,16 @@ class TodoItem extends Component {
 		this.setState({ newItem: e.target.value });
 	};
 
+	handleSubmit = () => {
+		const { newItem } = this.state
+		this.props.add_Item(newItem)
+		this.setState({newItem: ''})
+	}
+
 	render() {
 		const {newItem} = this.state
-		const {t, classes, addItem } = this.props;
-		const {  handleAddItem,  } = this
+		const {t, classes } = this.props;
+		const {  handleAddItem, handleSubmit  } = this
 
 		return (
 			<div className={classes.root}>
@@ -52,7 +58,7 @@ class TodoItem extends Component {
 					/>
 					<TodoButton
 						label={t('buttons.addNew')}
-						clickHandler={addItem(newItem)}
+						clickHandler={handleSubmit}
 					/>
 				</div>
 			</div>
@@ -75,11 +81,11 @@ TodoItem.propTypes = {
 };
 
 const mapStateToProps = state => ({
-	todos: state.todos,
+	...state.todos
 });
 
 const mapDispatchToProps = dispatch => ({
-	addItem: (data) => () => {
+	add_Item: (data) => {
 		dispatch(addItem(data));
 	},
 });

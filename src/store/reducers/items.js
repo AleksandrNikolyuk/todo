@@ -2,6 +2,7 @@ import {
 	ADD_ITEM,
 	DELETE_ITEM,
 	CHANGE_SELECTED_ITEM,
+	ADD_COMMENT
 } from 'store/action';
 
 const initialState = {
@@ -30,7 +31,19 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				selectedItem: action.payload
-			  };
+			};
+		}
+		case ADD_COMMENT: {
+			let items = [...state.list].map( todo => {
+				if( todo.id === action.payload.parentId){
+					todo.comments.push( action.payload );
+				}
+				return todo;
+			})
+			return {
+				...state,
+				list: items
+			};
 		}
 		default:
 			return state;

@@ -34,7 +34,7 @@ class TodoLang extends Component {
 					}}
 					onChange={this.handleChange}
 				>
-					<option value=""/>
+					{/* <option value=""/> */}
 					<option value={'en'}>{t('English')}</option>
 					<option value={'ru'}>{t('Russian')}</option>
 				</Select>

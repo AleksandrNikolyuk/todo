@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core';
-import TodoItem from 'app/components/TodoItem';
-import TodoListItem from 'app/components/TodoListItem';
+import TodoComments from 'app/components/TodoComments';
+import TodoListComments from 'app/components/TodoListComments';
 
 const styles = () => ({
 	root: {
@@ -17,23 +17,23 @@ const styles = () => ({
 	},
 });
 
-class TodoItemsContainer extends Component {
+class TodoCommentsContainer extends Component {
 
 	render() {
 		const { classes } = this.props;
 		return (
 			<div className={classes.root}>
-				<TodoItem/>
-				<TodoListItem/>
+				<TodoComments/>
+				<TodoListComments/>
 			</div>
 		);
 	}
 }
 
-TodoItemsContainer.defaultProps = {};
+TodoCommentsContainer.defaultProps = {};
 
-TodoItemsContainer.propTypes = {
+TodoCommentsContainer.propTypes = {
 	classes: PropTypes.object,
 };
 
-export default withStyles(styles, { withTheme: true })(TodoItemsContainer);
+export default withStyles(styles, { withTheme: true })(TodoCommentsContainer);
