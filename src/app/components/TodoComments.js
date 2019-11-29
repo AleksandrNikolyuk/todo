@@ -48,6 +48,7 @@ class TodoComments extends Component {
 						value={newComment}
 						label={t('comments')}
 						handlerChange={handleAddComment}
+						rows={4}
 					/>
 				</div>
 				<TodoButton

@@ -11,6 +11,7 @@ const styles = () => ({
 	root: {},
 	list: {
 		width: 'auto',
+		marginTop: '20px',
 		display: 'flex',
 		paddingBottom: '10px',
 		marginBottom: '10px',
@@ -18,34 +19,34 @@ const styles = () => ({
 		borderBottom: '2px solid #eee',
 	},
 	item: {
+		marginTop: '20px',
 		display: 'flex',
 		alignItems: 'flex-end',
 		justifyContent: 'space-between',
 	},
 	text: {
-		fontSize: '14px',
+		fontSize: '20px',
 	}
 });
 
 class TodoListComments extends Component {
 	render() {
-		const { t, classes, comments, list } = this.props;
-		console.log('comments', comments, list )
+		const { classes, comments } = this.props;
 		return (
 			<div className={classes.root}>
-				{list.length !== 0 && list.map(item => {
-					console.log('item',item)
+				{comments.length !== 0 && comments.map(item => {
+					return (
+						<div className={classes.list} key={item.id}>
+							<div key={item.id} className={classes.item}>
+								<TodoImage />
+								<div className={classes.text}>{item.content}</div>
+							</div>
+						</div>
+					)
 				
 					})
 				}
-				{/* <div className={classes.list}>
-					{comments.map(item => (
-						<div key={item.id} className={classes.item}>
-							<TodoImage />
-							<div className={classes.text}>{item.text}</div>
-						</div>
-					))}
-				</div> */}
+				
 			 </div>
 		);		
 	}
@@ -53,13 +54,12 @@ class TodoListComments extends Component {
 
 TodoListComments.defaultProps = {
 	classes: {},
-	list: [],
-	
+	comments: [],
 };
 
 TodoListComments.propTypes = {
 	classes: PropTypes.object,
-	list: PropTypes.array,
+	comments: PropTypes.array,
 	t: PropTypes.func,
 };
 

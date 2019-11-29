@@ -11,9 +11,12 @@ import {
 import { TodoDelButton } from '@todo';
 
 const styles = () => ({
-	root: {},
+	root: {
+		listStyle: 'none',
+		paddingLeft: '10px'
+	},
 	list: {
-		width: 'auto',
+		width: '100%',
 		display: 'flex',
 		paddingBottom: '10px',
 		marginBottom: '10px',
@@ -30,7 +33,7 @@ const styles = () => ({
 	},
 	selected: {
 		borderLeft: '2px solid red',
-		paddingLeft: '10px',
+		// paddingLeft: '10px',
 		marginLeft: '-1px'
 	}
 });
@@ -38,7 +41,7 @@ const styles = () => ({
 class TodoListItem extends Component {
 	render() {
 		const { t, classes, deletItem, changeItem, list, selectedItem  } = this.props;
-			
+			console.log(list)
 		return (
 			<ul className={classes.root} >
 				{list.length !== 0 && list.map(item => {
@@ -46,11 +49,12 @@ class TodoListItem extends Component {
 					return (
 						<li 
 							className={classNames(classes.list, select)} 
+							className={classNames(classes.list)} 
 							key={item.id} 
 							onClick={changeItem(item.id)}
 						>
 								<div className={classes.item}>
-									<div className={classes.title} >{item.title}</div>
+									<div className={classes.title} >{item.content}</div>
 									<TodoDelButton
 										label={t('buttons.delete')}
 										clickHandler={deletItem(item.id)}
@@ -67,7 +71,7 @@ class TodoListItem extends Component {
 TodoListItem.defaultProps = {
 	classes: {},
 	list: [],
-	selectedItem: '',
+	selected: {},
 	deletItem: () => {
 	},
 	changeItem: () => {

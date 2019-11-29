@@ -5,10 +5,36 @@ import {
 	ADD_COMMENT
 } from 'store/action';
 
+// const initialState = {
+// 	list: [],
+// 	selectedItem: "",
+// };
+
 const initialState = {
-	list: [],
-	selectedItem: null,
-};
+	list: [
+        {
+            id: "k3ebb7gb",
+            content: "Alex",
+		}
+    ],
+    comments: [
+        {
+            id: "k3ebvdgz",
+            itemId: ["k3ebb7gb" ],
+            content: "Alex send a text message",
+            iconCol: "red"
+		},
+		{
+            id: "k3ebvdgz",
+            itemId: ["k3ebb7gb" ],
+            content: "Alex send a text message",
+            iconCol: "red"
+        }
+    ],
+    selected: {
+        item: "k3ebb7gb",
+    }
+}
 
 export default (state = initialState, action) => {
 	switch (action.type) {

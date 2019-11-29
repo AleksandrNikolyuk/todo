@@ -12,7 +12,6 @@ import { addItem } from 'store/action';
 const styles = () => ({
 	root: {
 		padding: '20px',
-		margin: '10px',
 		display: 'flex',
 		flexDirection: 'column',
 		borderWidth: '2px',
@@ -20,6 +19,7 @@ const styles = () => ({
 		borderColor: '#eee',
 	},
 	inputBlock: {
+		height: '100px',
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center',

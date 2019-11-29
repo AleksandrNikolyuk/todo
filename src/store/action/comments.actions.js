@@ -9,8 +9,8 @@ export const addComment = data => (dispatch, getState) => {
 		type: Actions.ADD_COMMENT,
 		payload: {
 			id: uniqid(),
-            text: data,
-            parentId: selectedItem,
+            content: data,
+            // parentId: selectedItem,
 		},
 	});
 };
