@@ -6,8 +6,7 @@ export const addItem = data => (dispatch) => {
 		type: Actions.ADD_ITEM,
 		payload: {
 			id: uniqid(),
-			title: data,
-			// comments: [],
+			content: data,
 		},
 	});
 };
@@ -21,9 +20,11 @@ export const deletItem = id => (dispatch) => {
 	});
 };
 
-export const changeItem = id => (dispatch) => {
+export const changeItem = item => (dispatch) => {
 	dispatch ({
 		type: Actions.CHANGE_SELECTED_ITEM,
-		payload: id
+		payload: {
+			item,
+		}
 	});
 };

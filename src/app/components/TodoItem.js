@@ -81,7 +81,7 @@ TodoItem.propTypes = {
 };
 
 const mapStateToProps = state => ({
-	...state.todos
+	...state
 });
 
 const mapDispatchToProps = dispatch => ({

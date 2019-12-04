@@ -1,0 +1,21 @@
+{
+    "list": [
+      {
+        "id": "k3ebb7gb",
+        "content": "user Alex"
+      }
+    ],
+    "comments": [
+      {
+        "id": "k3ebvdgz",
+        "itemId": [
+          "k3ebb7gb"
+        ],
+        "content": "Alex send a text message",
+        "iconCol": "red"
+      }
+    ],
+    "selected": {
+      "item": "k3ebb7gb"
+    }
+  }

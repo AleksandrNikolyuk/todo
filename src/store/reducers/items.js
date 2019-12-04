@@ -1,43 +1,37 @@
 import {
+	REQUESTED_FIRST_PAGE,
+	DATA_RECEIVED,
+
 	ADD_ITEM,
 	DELETE_ITEM,
 	CHANGE_SELECTED_ITEM,
 	ADD_COMMENT
 } from 'store/action';
 
-// const initialState = {
-// 	list: [],
-// 	selectedItem: "",
-// };
-
 const initialState = {
-	list: [
-        {
-            id: "k3ebb7gb",
-            content: "Alex",
-		}
-    ],
-    comments: [
-        {
-            id: "k3ebvdgz",
-            itemId: ["k3ebb7gb" ],
-            content: "Alex send a text message",
-            iconCol: "red"
-		},
-		{
-            id: "k3ebvdgz",
-            itemId: ["k3ebb7gb" ],
-            content: "Alex send a text message",
-            iconCol: "red"
-        }
-    ],
-    selected: {
-        item: "k3ebb7gb",
-    }
-}
+	loading: false,
+	list: [],
+	comments: [],
+	selected: {},
+};
+
+
 
 export default (state = initialState, action) => {
-	switch (action.type) {
+	switch (action.type) {	
+	case REQUESTED_FIRST_PAGE: 
+		return {
+			...state,
+			loading: true
+		}
+	case DATA_RECEIVED:
+		return {
+			...state,
+			loading: false,
+			list: action.payload.list,
+			comments: action.payload.comments,
+			selected: action.payload.selected
+		}
 		case ADD_ITEM:
 			return {
 				...state,
@@ -47,7 +41,6 @@ export default (state = initialState, action) => {
 				],
 			};
 		case DELETE_ITEM: {
-			console.log(action);
 			return {
 				...state,
 				list: state.list.filter(item => item.id !== action.payload.id),
@@ -56,13 +49,13 @@ export default (state = initialState, action) => {
 		case CHANGE_SELECTED_ITEM: {
 			return {
 				...state,
-				selectedItem: action.payload
+				selected: action.payload
 			};
 		}
 		case ADD_COMMENT: {
 			let items = [...state.list].map( todo => {
-				if( todo.id === action.payload.parentId){
-					todo.comments.push( action.payload );
+				if( todo.id === action.payload.itemId){
+					todo.comments.content.push( action.payload );
 				}
 				return todo;
 			})

@@ -64,7 +64,7 @@ TodoListComments.propTypes = {
 };
 
 const mapStateToProps = state => ({
-	...state.todos
+	...state.items
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,15 +1,10 @@
 import items from './items';
+import comments from './comments';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
-		todos: items,
+		items,
+		comments
 });
 
 export default rootReducer;
-
-
-// employees: combineReducers({
-// 	list: employees,
-// 	selected: selectedEmployees,
-// 	status: employeesStatus
-//   }),

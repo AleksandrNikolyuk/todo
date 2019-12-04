@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { withStyles } from '@material-ui/core/styles';
 import i18n from 'i18n';
 import {
 	InputLabel,
 	FormControl,
 	Select,
+	withStyles,
 } from '@material-ui/core';
 
 const styles = () => ({
@@ -25,18 +25,16 @@ class TodoLang extends Component {
 		const { classes, t } = this.props;
 		return (
 			<FormControl className={classes.root}>
-				<InputLabel htmlFor="filled-age-native-simple">{t('buttons.languages')}</InputLabel>
+				<InputLabel>{t('buttons.languages')}</InputLabel>
 				<Select
 					native
 					inputProps={{
 						name: 'Language',
-						id: 'filled-age-native-simple',
 					}}
 					onChange={this.handleChange}
 				>
-					{/* <option value=""/> */}
-					<option value={'en'}>{t('English')}</option>
 					<option value={'ru'}>{t('Russian')}</option>
+					<option value={'en'}>{t('English')}</option>
 				</Select>
 			</FormControl>
 		);

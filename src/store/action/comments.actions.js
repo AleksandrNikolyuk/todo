@@ -4,13 +4,13 @@ import uniqid from 'uniqid';
 
 export const addComment = data => (dispatch, getState) => {
     console.log( dispatch, getState );
-    const selectedItem = getState().todos.selectedItem;
+    const selected = getState().item.selected;
 	dispatch({
 		type: Actions.ADD_COMMENT,
 		payload: {
 			id: uniqid(),
             content: data,
-            // parentId: selectedItem,
+            itemId: selected,
 		},
 	});
 };

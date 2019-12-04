@@ -6,7 +6,8 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { 
 	deletItem, 
-	changeItem 
+	changeItem,
+	getData,
 } from 'store/action';
 import { TodoDelButton } from '@todo';
 
@@ -29,27 +30,36 @@ const styles = () => ({
 		justifyContent: 'space-between',
 	},
 	title: {
+		paddingLeft: '10px',
 		fontSize: '20px',
 	},
-	selected: {
+	selectedUser: {
 		borderLeft: '2px solid red',
-		// paddingLeft: '10px',
-		marginLeft: '-1px'
+		marginLeft: '-2px'
 	}
 });
 
 class TodoListItem extends Component {
+
+
+	componentDidMount() {
+		this.props.getData()
+	};
+
 	render() {
-		const { t, classes, deletItem, changeItem, list, selectedItem  } = this.props;
-			console.log(list)
+		const { t, classes, deletItem, changeItem, list, selected  } = this.props;
+			// console.log('selected',selected.item)
+			
 		return (
 			<ul className={classes.root} >
 				{list.length !== 0 && list.map(item => {
-					const select = selectedItem === item.id ? classes.selected : "";
+					console.log('item.id',item.id)
+					console.log('selected',selected.id)
+					const select = selected.item === item.id ? classes.selectedUser : '';
 					return (
 						<li 
 							className={classNames(classes.list, select)} 
-							className={classNames(classes.list)} 
+							// className={classNames(classes.list)} 
 							key={item.id} 
 							onClick={changeItem(item.id)}
 						>
@@ -71,7 +81,7 @@ class TodoListItem extends Component {
 TodoListItem.defaultProps = {
 	classes: {},
 	list: [],
-	selected: {},
+	selectedUser: {},
 	deletItem: () => {
 	},
 	changeItem: () => {
@@ -82,7 +92,7 @@ TodoListItem.defaultProps = {
 TodoListItem.propTypes = {
 	classes: PropTypes.object,
 	list: PropTypes.array,
-	selectedItem: PropTypes.string,
+	// selected: PropTypes.string,
 	clickHandler: PropTypes.func,
 	t: PropTypes.func,
 	deletItem: PropTypes.func,
@@ -90,7 +100,7 @@ TodoListItem.propTypes = {
 };
 
 const mapStateToProps = state => ({
-	...state.todos,
+	...state.items,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -101,6 +111,9 @@ const mapDispatchToProps = dispatch => ({
 
 	changeItem: (id) => () => {
 		dispatch(changeItem(id))
+	},
+	getData: ()  => {
+		dispatch(getData())
 	}
 });
 
