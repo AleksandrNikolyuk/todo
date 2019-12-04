@@ -1,12 +1,4 @@
-import {
-	REQUESTED_FIRST_PAGE,
-	DATA_RECEIVED,
-
-	ADD_ITEM,
-	DELETE_ITEM,
-	CHANGE_SELECTED_ITEM,
-	ADD_COMMENT
-} from 'store/action';
+import * as Actions from 'store/action';
 
 const initialState = {
 	loading: false,
@@ -15,24 +7,22 @@ const initialState = {
 	selected: {},
 };
 
-
-
 export default (state = initialState, action) => {
-	switch (action.type) {	
-	case REQUESTED_FIRST_PAGE: 
-		return {
-			...state,
-			loading: true
-		}
-	case DATA_RECEIVED:
-		return {
-			...state,
-			loading: false,
-			list: action.payload.list,
-			comments: action.payload.comments,
-			selected: action.payload.selected
-		}
-		case ADD_ITEM:
+	switch (action.type) {
+		case Actions.REQUESTED_FIRST_PAGE:
+			return {
+				...state,
+				loading: true,
+			};
+		case Actions.DATA_RECEIVED:
+			return {
+				...state,
+				loading: false,
+				list: action.payload.list,
+				comments: action.payload.comments,
+				selected: action.payload.selected,
+			};
+		case Actions.ADD_ITEM:
 			return {
 				...state,
 				list: [
@@ -40,28 +30,28 @@ export default (state = initialState, action) => {
 					action.payload,
 				],
 			};
-		case DELETE_ITEM: {
+		case Actions.DELETE_ITEM: {
 			return {
 				...state,
 				list: state.list.filter(item => item.id !== action.payload.id),
 			};
 		}
-		case CHANGE_SELECTED_ITEM: {
+		case Actions.CHANGE_SELECTED_ITEM: {
 			return {
 				...state,
-				selected: action.payload
+				selected: action.payload,
 			};
 		}
-		case ADD_COMMENT: {
-			let items = [...state.list].map( todo => {
-				if( todo.id === action.payload.itemId){
-					todo.comments.content.push( action.payload );
+		case Actions.ADD_COMMENT: {
+			let items = [ ...state.list ].map(todo => {
+				if (todo.id === action.payload.itemId) {
+					todo.comments.content.push(action.payload);
 				}
 				return todo;
-			})
+			});
 			return {
 				...state,
-				list: items
+				list: items,
 			};
 		}
 		default:

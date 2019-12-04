@@ -3,8 +3,8 @@ import comments from './comments';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
-		items,
-		comments
+	items,
+	comments,
 });
 
 export default rootReducer;
