@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ScrollArea from 'react-scrollbar';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { withTranslation } from 'react-i18next';
@@ -8,10 +9,11 @@ import {
 } from '@todo';
 
 const styles = () => ({
-	root: {},
+	root: {
+		paddingRight:'15px',
+	},
 	list: {
 		width: 'auto',
-		marginTop: '20px',
 		display: 'flex',
 		paddingBottom: '10px',
 		marginBottom: '10px',
@@ -31,23 +33,27 @@ const styles = () => ({
 
 class TodoListComments extends Component {
 	render() {
-		const { classes, comments } = this.props;
+		const { classes, comment, items } = this.props;
 		return (
-			<div className={classes.root}>
-				{comments.length !== 0 && comments.map(item => {
-					return (
-						<div className={classes.list} key={item.id}>
-							<div key={item.id} className={classes.item}>
-								<TodoImage />
-								<div className={classes.text}>{item.content}</div>
-							</div>
-						</div>
-					)
-				
-					})
-				}
-				
-			 </div>
+			<ScrollArea
+				speed={0.8}
+				horizontal={false}
+			>
+				<div className={classes.root}>
+					{comment.length !== 0 && comment.map(item => {
+						if (item.itemId[0] === items) {
+							return (
+								<div className={classes.list} key={item.id}>
+									<div key={item.id} className={classes.item}>
+										<TodoImage />
+										<div className={classes.text}>{item.content}</div>
+									</div>
+								</div>
+							)
+						} else {return ''}	
+					})}
+				</div>
+			</ScrollArea>
 		);		
 	}
 }
@@ -64,7 +70,8 @@ TodoListComments.propTypes = {
 };
 
 const mapStateToProps = state => ({
-	...state.items
+	...state.comments,
+	...state.selected
 });
 
 const mapDispatchToProps = dispatch => ({

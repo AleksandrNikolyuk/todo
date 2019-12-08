@@ -8,7 +8,6 @@ import {
 const styles = () => ({
 	root: {
 		width: '400px',
-		// width: 'auto',
 		margin: '0'
 	},
 });

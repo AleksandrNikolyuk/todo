@@ -25,4 +25,8 @@ TodoImage.propTypes = {
 	classes: PropTypes.object,
 };
 
+TodoImage.defaultProps = {
+	
+};
+
 export default withStyles(styles,{ withTheme: true })(TodoImage);

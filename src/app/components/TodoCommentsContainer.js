@@ -8,7 +8,7 @@ const styles = () => ({
 	root: {
 		width: '35%',
 		padding: '20px',
-		margin: '50px',
+		margin: '30px 50px',
 		display: 'flex',
 		flexDirection: 'column',
 		borderWidth: '2px',

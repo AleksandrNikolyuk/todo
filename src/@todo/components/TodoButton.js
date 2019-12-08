@@ -10,9 +10,13 @@ const styles = () => ({
 	button: {
 		height: '50px',
 		width: '100px',
-		background: '#6495ed',
+		background: 'green',
 		color: 'white',
 		float: 'right',
+		'&:hover': {
+			color: 'green',
+			border: '1px solid green'
+		},
 	},
 });
 
@@ -23,7 +27,6 @@ class TodoButton extends Component {
 			<div className={classes.root}>
 				<Button
 					variant={'outlined'}
-					color={'secondary'}
 					onClick={clickHandler}
 					className={classes.button}
 				>

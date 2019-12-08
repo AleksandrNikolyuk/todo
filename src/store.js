@@ -8,7 +8,7 @@ import { saveState, loadState } from './localstorage';
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const middleware = applyMiddleware(
-	// logger,
+	logger,
 	thunk);
 
 let store = null;

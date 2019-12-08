@@ -1,12 +1,16 @@
 import React from 'react';
-import TodoLayout from 'app/components/TodoLayout';
-import store from 'store';
 import { Provider } from 'react-redux';
+import store from 'store';
+import { CssBaseline } from '@material-ui/core';
+import TodoLayout from 'app/components/TodoLayout';
 
 function App() {
 	return (
 		<Provider store={store}>
-			<TodoLayout/>
+			<React.Fragment>
+				<CssBaseline/>
+				<TodoLayout/>
+			</React.Fragment>
 		</Provider>
 	);
 }

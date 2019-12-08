@@ -11,8 +11,9 @@ import {
 import { addComment } from 'store/action';
 
 const styles = () => ({
-	root: {},
+	root: {marginBottom: '20px',},
 	commentBlock: {
+		marginBottom: '20px',
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center',
@@ -70,7 +71,7 @@ TodoComments.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-	...state.todos,
+	...state.comments,
 });
 
 const mapDispatchToProps = dispatch => ({
