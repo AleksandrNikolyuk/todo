@@ -21,10 +21,10 @@ export const deletItem = id => (dispatch) => {
 };
 
 export const changeItem = item => (dispatch) => {
-	dispatch ({
+	dispatch({
 		type: Actions.CHANGE_SELECTED_ITEM,
 		payload: {
 			item,
-		}
+		},
 	});
 };

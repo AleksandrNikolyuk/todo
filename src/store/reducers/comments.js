@@ -1,29 +1,22 @@
 import * as Actions from 'store/action';
 
-const initialState = {
-	itemId: null,
-	comment: [],
-};
+const initialState = [];
 
 export default (state = initialState, { type, payload }) => {
 	switch (type) {
 		case Actions.ADD_COMMENT: {
-			return {
+			return [
 				...state,
-				comment: [
-					...state.comment,
-					payload,
-				],
-			};
+				payload,
+			];
 		}
 		case Actions.DELETE_ITEM: {
 			return {
-				...state,
-				comment: state.comment.filter( comment => {
-					const commentDeleted = comment.itemId.some( id => id === payload.id);
+				...state.filter(comment => {
+					const commentDeleted = comment.itemId.some(id => id === payload.id);
 					return !commentDeleted;
-				})
-			}
+				}),
+			};
 		}
 		default: {
 			return state;

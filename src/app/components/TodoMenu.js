@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { withTranslation } from 'react-i18next';
 import TodoLang from 'app/components/TodoLang';
 
-
 const styles = () => ({
 	root: {
 		background: '#b0e0e6',
@@ -15,7 +14,6 @@ const styles = () => ({
 		justifyContent: 'space-between',
 		paddingBottom: '75px',
 	},
-
 });
 
 class TodoMenu extends Component {

@@ -1,7 +1,7 @@
 import * as Actions from 'store/action';
 
 const initialState = {
-    items: null,
+    item: '',
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -9,7 +9,7 @@ export default (state = initialState, { type, payload }) => {
 		case Actions.CHANGE_SELECTED_ITEM: {
 			return {
 				...state,
-				items: payload.item,
+				...payload,
 			};
 		}
 		default: {

@@ -1,15 +1,14 @@
 import * as Actions from 'store/action';
 import uniqid from 'uniqid';
 
-
 export const addComment = data => (dispatch, getState) => {
-    const selected = getState().selected.items;
+	const selected = getState().selected.item;
 	dispatch({
 		type: Actions.ADD_COMMENT,
 		payload: {
 			id: uniqid(),
-            content: data,
-            itemId: [selected],
+			content: data,
+			itemId: [ selected ],
 		},
 	});
 };

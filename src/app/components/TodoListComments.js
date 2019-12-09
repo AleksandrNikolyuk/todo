@@ -10,7 +10,7 @@ import {
 
 const styles = () => ({
 	root: {
-		paddingRight:'15px',
+		paddingRight: '15px',
 	},
 	list: {
 		width: 'auto',
@@ -28,54 +28,57 @@ const styles = () => ({
 	},
 	text: {
 		fontSize: '20px',
-	}
+	},
 });
 
 class TodoListComments extends Component {
 	render() {
-		const { classes, comment, items } = this.props;
+		const { classes, comments, selectedItem } = this.props;
+
 		return (
 			<ScrollArea
 				speed={0.8}
 				horizontal={false}
 			>
 				<div className={classes.root}>
-					{comment.length !== 0 && comment.map(item => {
-						if (item.itemId[0] === items) {
+					{comments.length !== 0 && comments.map(item => {
+						if (item.itemId[0] === selectedItem) {
 							return (
 								<div className={classes.list} key={item.id}>
 									<div key={item.id} className={classes.item}>
-										<TodoImage />
-										<div className={classes.text}>{item.content}</div>
+										<TodoImage/>
+										<div className={classes.text}>
+											{item.content}
+										</div>
 									</div>
 								</div>
-							)
-						} else {return ''}	
+							);
+						} else {
+							return '';
+						}
 					})}
 				</div>
 			</ScrollArea>
-		);		
+		);
 	}
 }
 
 TodoListComments.defaultProps = {
 	classes: {},
 	comments: [],
+	selectedItem: '',
 };
 
 TodoListComments.propTypes = {
 	classes: PropTypes.object,
 	comments: PropTypes.array,
+	selectedItem: PropTypes.string,
 	t: PropTypes.func,
 };
 
-const mapStateToProps = state => ({
-	...state.comments,
-	...state.selected
+const mapStateToProps = ({ comments, selected }) => ({
+	comments,
+	selectedItem: selected.item,
 });
 
-const mapDispatchToProps = dispatch => ({
-
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(withStyles(styles, { withTheme: true })(TodoListComments)));
+export default connect(mapStateToProps, null)(withTranslation()(withStyles(styles, { withTheme: true })(TodoListComments)));

@@ -11,7 +11,7 @@ import {
 import { addComment } from 'store/action';
 
 const styles = () => ({
-	root: {marginBottom: '20px',},
+	root: { marginBottom: '20px' },
 	commentBlock: {
 		marginBottom: '20px',
 		display: 'flex',
@@ -24,7 +24,7 @@ class TodoComments extends Component {
 
 	state = {
 		newComment: '',
-	}
+	};
 
 	handleAddComment = e => {
 		this.setState({ newComment: e.target.value });
@@ -32,12 +32,12 @@ class TodoComments extends Component {
 
 	handleSubmit = () => {
 		const { newComment } = this.state;
-		this.props.add_comment( newComment );
-		this.setState({ newComment: ''})
-	}
+		this.props.addComment(newComment);
+		this.setState({ newComment: '' });
+	};
 
 	render() {
-		const {newComment} = this.state
+		const { newComment } = this.state;
 		const { classes, t } = this.props;
 		const { handleAddComment, handleSubmit } = this;
 		return (
@@ -64,20 +64,19 @@ class TodoComments extends Component {
 TodoComments.propTypes = {
 	classes: PropTypes.object,
 	t: PropTypes.func,
+	addComment: PropTypes.func,
 };
 
 TodoComments.defaultProps = {
 	classes: {},
+	addComment: () => {
+	},
 };
 
-const mapStateToProps = state => ({
-	...state.comments,
-});
-
 const mapDispatchToProps = dispatch => ({
-	add_comment: (data) => {
+	addComment: (data) => {
 		dispatch(addComment(data));
 	},
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(withStyles(styles, { withTheme: true })(TodoComments)));
+export default connect(null, mapDispatchToProps)(withTranslation()(withStyles(styles, { withTheme: true })(TodoComments)));

@@ -5,7 +5,6 @@ import TodoCommentsContainer from 'app/components/TodoCommentsContainer';
 import TodoMenu from 'app/components/TodoMenu';
 import TodoItemsContainer from 'app/components/TodoItemsContainer';
 
-
 const styles = () => ({
 	root: {
 		width: '100%',
@@ -16,7 +15,6 @@ const styles = () => ({
 });
 
 class TodoLayout extends Component {
-
 	render() {
 		const { classes } = this.props;
 

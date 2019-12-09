@@ -5,17 +5,13 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { 
-	deletItem, 
-	changeItem,
-	// getData,
-} from 'store/action';
+import * as Actions from 'store/action';
 import { TodoDelButton } from '@todo';
 
 const styles = () => ({
 	root: {
 		listStyle: 'none',
-		padding: '0 15px 0 10px'
+		padding: '0 15px 0 10px',
 	},
 	list: {
 		width: '100%',
@@ -34,57 +30,54 @@ const styles = () => ({
 		paddingLeft: '10px',
 		fontSize: '20px',
 	},
-	selectedUser: {
+	selectedItem: {
 		borderLeft: '2px solid red',
-		marginLeft: '-2px'
+		marginLeft: '-2px',
 	},
 	commentsCount: {
 		background: '#87CEFA',
 		marginLeft: '10px',
-        padding: '3px 13px',
-        color: 'white',
-        borderRadius: '15px',
+		padding: '3px 13px',
+		color: 'white',
+		borderRadius: '15px',
 	},
 });
 
 class TodoListItem extends Component {
-
-	// componentDidMount() {
-	// 	this.props.getData()
-	// };
-
 	render() {
-		const { t, classes, deletItem, changeItem, list, items, comment  } = this.props;
-	
+		const { t, classes, deleteItem, changeItem, items, selectedItem, comments } = this.props;
+
 		return (
 			<ScrollArea
 				speed={0.8}
 				horizontal={false}
-            >
-				<ul className={classes.root} >
-					{list.length !== 0 && list.map(item => {
-						const select = items === item.id ? classes.selectedUser : '';
+			>
+				<ul className={classes.root}>
+					{items.length !== 0 && items.map(item => {
+						const select = selectedItem === item.id
+							? classes.selectedItem
+							: '';
 
-						const commentsCount = comment.filter( comment => comment.itemId.some( id => id === item.id) );
+						const commentsCount = comments.filter(comment => comment.itemId.some(id => id === item.id));
 
-						console.log('commentsCount', commentsCount )
+						console.log('item.id', item.id)
 
 						return (
-							<li 
+							<li
 								className={classNames(classes.list, select)}
-								key={item.id} 
+								key={item.id}
 								onClick={changeItem(item.id)}
 							>
-									<div className={classes.item}>
-										<div className={classes.title}>
-											{item.content}
-											<span className={classes.commentsCount}>{commentsCount.length}</span>
-										</div>
-										<TodoDelButton
-											label={t('buttons.delete')}
-											clickHandler={deletItem(item.id)}
-										/>
+								<div className={classes.item}>
+									<div className={classes.title}>
+										{item.content}
+										<span className={classes.commentsCount}>{commentsCount.length}</span>
 									</div>
+									<TodoDelButton
+										label={t('buttons.delete')}
+										clickHandler={deleteItem(item.id)}
+									/>
+								</div>
 							</li>
 						);
 					})}
@@ -96,8 +89,9 @@ class TodoListItem extends Component {
 
 TodoListItem.defaultProps = {
 	classes: {},
-	list: [],
-	selectedUser: {},
+	items: [],
+	selectedItem: '',
+	comment: [],
 	deletItem: () => {
 	},
 	changeItem: () => {
@@ -106,31 +100,28 @@ TodoListItem.defaultProps = {
 
 TodoListItem.propTypes = {
 	classes: PropTypes.object,
-	list: PropTypes.array,
+	items: PropTypes.array,
+	selectedItem: PropTypes.string,
+	comments: PropTypes.array,
 	clickHandler: PropTypes.func,
 	t: PropTypes.func,
-	deletItem: PropTypes.func,
+	deleteItem: PropTypes.func,
 	changeItem: PropTypes.func,
 };
 
-const mapStateToProps = state => ({
-	...state.items,
-	...state.selected,
-	...state.comments,
+const mapStateToProps = ({ items, selected, comments }) => ({
+	items: items,
+	selectedItem: selected.item,
+	comments,
 });
 
 const mapDispatchToProps = dispatch => ({
-
-	deletItem: (id) => () => {
-		dispatch(deletItem(id))
+	deleteItem: (id) => () => {
+		dispatch(Actions.deletItem(id));
 	},
-
 	changeItem: (id) => () => {
-		dispatch(changeItem(id))
+		dispatch(Actions.changeItem(id));
 	},
-	// getData: ()  => {
-	// 	dispatch(getData())
-	// }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(withStyles(styles, { withTheme: true })(TodoListItem)));

@@ -1,24 +1,18 @@
 import * as Actions from 'store/action';
 
-const initialState = {
-	list: [],
-};
+const initialState = [];
 
-export default (state = initialState, {type, payload}) => {
+export default (state = initialState, { type, payload }) => {
 	switch (type) {
 		case Actions.ADD_ITEM: {
-			return {
+			return [
 				...state,
-				list: [
-					...state.list,
-					payload,
-				],
-			};
+				payload,
+			];
 		}
 		case Actions.DELETE_ITEM: {
 			return {
-				...state,
-				list: state.list.filter(item => item.id !== payload.id),
+				...state.filter(item => item.id !== payload.id),
 			};
 		}
 		default:
