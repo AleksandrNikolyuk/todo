@@ -101,9 +101,9 @@ class TodoListItem extends Component {
 
 TodoListItem.defaultProps = {
 	classes: {},
-	// items: [],
+	items: [],
 	selectedItem: '',
-	// comment: [],
+	comment: [],
 	deletItem: () => {
 	},
 	changeItem: () => {
@@ -112,9 +112,9 @@ TodoListItem.defaultProps = {
 
 TodoListItem.propTypes = {
 	classes: PropTypes.object,
-	// items: PropTypes.array,
+	items: PropTypes.array,
 	selectedItem: PropTypes.string,
-	// comments: PropTypes.array,
+	comments: PropTypes.array,
 	clickHandler: PropTypes.func,
 	t: PropTypes.func,
 	deleteItem: PropTypes.func,
