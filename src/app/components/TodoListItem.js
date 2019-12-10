@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import * as Actions from 'store/action';
-import { TodoDelButton } from '@todo';
+import { TodoDelButton, TodoEditButton } from '@todo';
 
 const styles = () => ({
 	root: {
@@ -41,11 +41,16 @@ const styles = () => ({
 		color: 'white',
 		borderRadius: '15px',
 	},
+	buttonBlock: {
+		display: 'flex',
+	}
 });
 
 class TodoListItem extends Component {
 	render() {
 		const { t, classes, deleteItem, changeItem, items, selectedItem, comments } = this.props;
+
+		console.log('items', items)
 
 		return (
 			<ScrollArea
@@ -54,6 +59,7 @@ class TodoListItem extends Component {
 			>
 				<ul className={classes.root}>
 					{items.length !== 0 && items.map(item => {
+						console.log('ITEM', item)
 						const select = selectedItem === item.id
 							? classes.selectedItem
 							: '';
@@ -73,10 +79,16 @@ class TodoListItem extends Component {
 										{item.content}
 										<span className={classes.commentsCount}>{commentsCount.length}</span>
 									</div>
-									<TodoDelButton
-										label={t('buttons.delete')}
-										clickHandler={deleteItem(item.id)}
-									/>
+									<div className={classes.buttonBlock}>
+										<TodoEditButton
+											label={t('buttons.edit')}
+											clickHandler={deleteItem(item.id)}
+										/>
+										<TodoDelButton
+											label={t('buttons.delete')}
+											clickHandler={deleteItem(item.id)}
+										/>
+									</div>
 								</div>
 							</li>
 						);
@@ -89,9 +101,9 @@ class TodoListItem extends Component {
 
 TodoListItem.defaultProps = {
 	classes: {},
-	items: [],
+	// items: [],
 	selectedItem: '',
-	comment: [],
+	// comment: [],
 	deletItem: () => {
 	},
 	changeItem: () => {
@@ -100,9 +112,9 @@ TodoListItem.defaultProps = {
 
 TodoListItem.propTypes = {
 	classes: PropTypes.object,
-	items: PropTypes.array,
+	// items: PropTypes.array,
 	selectedItem: PropTypes.string,
-	comments: PropTypes.array,
+	// comments: PropTypes.array,
 	clickHandler: PropTypes.func,
 	t: PropTypes.func,
 	deleteItem: PropTypes.func,

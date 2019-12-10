@@ -8,7 +8,7 @@ const styles = () => ({
 	root: {},
 	button: {
 		height: '50px',
-		width: '100px',
+		width: '80px',
 		color: 'red',
 		float: 'right',
 	},
