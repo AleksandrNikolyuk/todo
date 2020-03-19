@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import ScrollArea from 'react-scrollbar';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -6,7 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import * as Actions from 'store/action';
-import { TodoDelButton, TodoEditButton } from '@todo';
+import { addItem, changeItemContent} from 'store/action';
+import { TodoDelButton, TodoEditButton, TodoTextfield } from '@todo';
 
 const styles = () => ({
 	root: {
@@ -20,6 +21,9 @@ const styles = () => ({
 		marginBottom: '10px',
 		flexDirection: 'column',
 		borderBottom: '2px solid #eee',
+		'&:hover': {
+			background: '#eef7fa'
+		}
 	},
 	item: {
 		display: 'flex',
@@ -27,6 +31,7 @@ const styles = () => ({
 		justifyContent: 'space-between',
 	},
 	title: {
+		display: 'flex',
 		paddingLeft: '10px',
 		fontSize: '20px',
 	},
@@ -35,6 +40,7 @@ const styles = () => ({
 		marginLeft: '-2px',
 	},
 	commentsCount: {
+		height: '32px',
 		background: '#87CEFA',
 		marginLeft: '10px',
 		padding: '3px 13px',
@@ -43,63 +49,121 @@ const styles = () => ({
 	},
 	buttonBlock: {
 		display: 'flex',
+	},
+	editField: {
+		width: '300px',
+	},
+	count: {
+		display: 'flex',
+		alignItems: 'center',
 	}
 });
 
-class TodoListItem extends Component {
-	render() {
-		const { t, classes, deleteItem, changeItem, items, selectedItem, comments } = this.props;
+function TodoListItem({
+	t,
+	classes,
+	deleteItem,
+	changeItem,
+	items,
+	selectedItem,
+	comments,
+	addItem,
+	changeItemContent,
+}) {
+	
+	const [state, setState] = useState('')
+	const [newstate, setNewState] = useState('')
 
-		console.log('items', items)
+	const activeEditItem = (id, content) => {
+		setState ({
+			id, content
+		})
+	}
 
-		return (
-			<ScrollArea
-				speed={0.8}
-				horizontal={false}
-			>
-				<ul className={classes.root}>
-					{items.length !== 0 && items.map(item => {
-						console.log('ITEM', item)
-						const select = selectedItem === item.id
-							? classes.selectedItem
-							: '';
+	const handleSubmit = () => {
+		changeItemContent(newstate);
+		setNewState('')
+	};
 
-						const commentsCount = comments.filter(comment => comment.itemId.some(id => id === item.id));
+	const endEditItem = () => {
+		setState({})
+	}
 
-						console.log('item.id', item.id)
+	const handleAddItem = e => {
+		setNewState(e.target.value );
+	};
+	
+	return (
+		<ScrollArea
+			speed={0.8}
+			horizontal={false}
+		>
+			<ul className={classes.root}>
+				{items.length !== 0 && items.map(item => {
+					const select = selectedItem === item.id
+						? classes.selectedItem
+						: '';
 
-						return (
-							<li
-								className={classNames(classes.list, select)}
-								key={item.id}
-								onClick={changeItem(item.id)}
-							>
-								<div className={classes.item}>
-									<div className={classes.title}>
-										{item.content}
+					const commentsCount = comments.filter(comment => comment.itemId.some(id => id === item.id));
+
+					return (
+						<li
+							className={classNames(classes.list, select)}
+							key={item.id}
+							onClick={changeItem(item.id)}
+						>
+							<div className={classes.item}>
+								<div 
+									className={classes.title}
+									onDoubleClick={() => {
+										activeEditItem(item.id, item.content)
+
+									}}
+								>
+									{state.content == item.content && state.id == item.id
+										? (
+											<div className={classes.editField}>
+											<TodoTextfield
+												value={newstate}
+												handlerChange={handleAddItem}
+												label={t('user')}
+												changeOnKeyEnter={event => {
+													endEditItem();
+													handleSubmit()
+												}}
+											/></div>
+										)
+										: (
+											<div>{item.content}</div>
+										)
+									}
+									<div className={classes.count}>
 										<span className={classes.commentsCount}>{commentsCount.length}</span>
 									</div>
-									<div className={classes.buttonBlock}>
-										<TodoEditButton
-											label={t('buttons.edit')}
-											clickHandler={deleteItem(item.id)}
-										/>
-										<TodoDelButton
-											label={t('buttons.delete')}
-											clickHandler={deleteItem(item.id)}
-										/>
-									</div>
 								</div>
-							</li>
-						);
-					})}
-				</ul>
-			</ScrollArea>
-		);
-	}
+								<div className={classes.buttonBlock}>
+									<TodoEditButton
+										label={t('buttons.edit')}
+										clickHandler={() => {
+											activeEditItem(item.id, item.content)
+										}}
+									/>
+									<TodoDelButton
+										label={t('buttons.delete')}
+										clickHandler={deleteItem(item.id)}
+									/>
+								</div>
+							</div>
+						</li>
+					);
+				})}
+			</ul>
+		</ScrollArea>
+	);
 }
 
 TodoListItem.defaultProps = {
+	state: {},
 	classes: {},
 	items: [],
 	selectedItem: '',
@@ -107,6 +171,8 @@ TodoListItem.defaultProps = {
 	deletItem: () => {
 	},
 	changeItem: () => {
+	},
+	changeItemContent: () => {
 	},
 };
 
@@ -133,6 +199,9 @@ const mapDispatchToProps = dispatch => ({
 	},
 	changeItem: (id) => () => {
 		dispatch(Actions.changeItem(id));
+	},
+	changeItemContent: (data) => {
+		dispatch(changeItemContent(data));
 	},
 });
 

@@ -5,6 +5,7 @@ export const ADD_ITEM = '[TODO] ADD_ITEM';
 export const ADD_COMMENT = '[TODO] ADD_COMMENT';
 
 export const CHANGE_SELECTED_ITEM = '[TODO] CHANGE_SELECTED_ITEM';
+export const CHANGE_ITEM_CONTENT = '[TODO] CHANGE_ITEM_CONTENT';
 
 export const DELETE_ITEM = '[TODO] DELETE_ITEM';
 

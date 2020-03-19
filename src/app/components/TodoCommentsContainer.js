@@ -17,17 +17,14 @@ const styles = () => ({
 	},
 });
 
-class TodoCommentsContainer extends Component {
-
-	render() {
-		const { classes } = this.props;
-		return (
-			<div className={classes.root}>
-				<TodoComments/>
-				<TodoListComments/>
-			</div>
-		);
-	}
+function TodoCommentsContainer({classes}) {
+		
+	return (
+		<div className={classes.root}>
+			<TodoComments/>
+			<TodoListComments/>
+		</div>
+	);
 }
 
 TodoCommentsContainer.defaultProps = {};

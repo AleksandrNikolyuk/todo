@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core';
 import { withTranslation } from 'react-i18next';
@@ -24,38 +24,40 @@ const styles = () => ({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 	},
+	editField: {
+		width: '400px',
+	},
 });
 
-class TodoItem extends Component {
 
-	state = {
-		newItem: '',
+function TodoItem({
+	t,
+	classes,
+	addItem 
+}) {
+
+	const [newItem, setAddItem] = useState('')
+
+	const handleAddItem = e => {
+		setAddItem(e.target.value );
 	};
 
-	handleAddItem = e => {
-		this.setState({ newItem: e.target.value });
+	const handleSubmit = () => {
+		addItem(newItem);
+		setAddItem('')
 	};
-
-	handleSubmit = () => {
-		const { newItem } = this.state;
-		this.props.addItem(newItem);
-		this.setState({ newItem: '' });
-	};
-
-	render() {
-		const { newItem } = this.state;
-		const { t, classes } = this.props;
-		const { handleAddItem, handleSubmit } = this;
 
 		return (
 			<div className={classes.root}>
 				<h1>{t('items')}</h1>
 				<div className={classes.inputBlock}>
-					<TodoTextfield
-						value={newItem}
-						handlerChange={handleAddItem}
-						label={t('user')}
-					/>
+					<div className={classes.editField}>
+						<TodoTextfield
+							value={newItem}
+							handlerChange={handleAddItem}
+							label={t('user')}
+						/>
+					</div>
 					<TodoButton
 						label={t('buttons.addNew')}
 						clickHandler={handleSubmit}
@@ -63,7 +65,6 @@ class TodoItem extends Component {
 				</div>
 			</div>
 		);
-	}
 }
 
 TodoItem.defaultProps = {
@@ -77,7 +78,7 @@ TodoItem.propTypes = {
 	t: PropTypes.func,
 	value: PropTypes.string,
 	classes: PropTypes.object,
-	addItem: PropTypes.func,
+	// addItem: PropTypes.func,
 };
 
 const mapStateToProps = state => ({

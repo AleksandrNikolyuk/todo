@@ -31,36 +31,34 @@ const styles = () => ({
 	},
 });
 
-class TodoListComments extends Component {
-	render() {
-		const { classes, comments, selectedItem } = this.props;
-
-		return (
-			<ScrollArea
-				speed={0.8}
-				horizontal={false}
-			>
-				<div className={classes.root}>
-					{comments.length !== 0 && comments.map(item => {
-						if (item.itemId[0] === selectedItem) {
-							return (
-								<div className={classes.list} key={item.id}>
-									<div key={item.id} className={classes.item}>
-										<TodoImage/>
-										<div className={classes.text}>
-											{item.content}
-										</div>
+function TodoListComments({classes, comments, selectedItem}) {
+	
+	return (
+		<ScrollArea
+			speed={0.8}
+			horizontal={false}
+		>
+			<div className={classes.root}>
+				{comments.length !== 0 && comments.map(item => {
+					if (item.itemId[0] === selectedItem) {
+						return (
+							<div className={classes.list} key={item.id}>
+								<div key={item.id} className={classes.item}>
+									<TodoImage/>
+									<div className={classes.text}>
+										{item.content}
 									</div>
 								</div>
-							);
-						} else {
-							return '';
-						}
-					})}
-				</div>
-			</ScrollArea>
-		);
-	}
+							</div>
+						);
+					} else {
+						return '';
+					}
+				})}
+			</div>
+		</ScrollArea>
+	);
+	
 }
 
 TodoListComments.defaultProps = {

@@ -20,21 +20,22 @@ const styles = () => ({
 	},
 });
 
-class TodoButton extends Component {
-	render() {
-		const { classes, label, clickHandler } = this.props;
-		return (
-			<div className={classes.root}>
-				<Button
-					variant={'outlined'}
-					onClick={clickHandler}
-					className={classes.button}
-				>
-					{label}
-				</Button>
-			</div>
-		);
-	}
+function TodoButton({
+	classes,
+	label,
+	clickHandler
+}) {
+	return (
+		<div className={classes.root}>
+			<Button
+				variant={'outlined'}
+				onClick={clickHandler}
+				className={classes.button}
+			>
+				{label}
+			</Button>
+		</div>
+	);
 }
 
 TodoButton.propTypes = {

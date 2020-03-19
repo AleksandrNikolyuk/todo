@@ -7,30 +7,47 @@ import {
 
 const styles = () => ({
 	root: {
-		width: '400px',
-		margin: '0'
+		width: '100%',
+		margin: '0',
 	},
 });
 
-class TodoTextfield extends Component {
-	render() {
-		const { classes, label, rows, value, handlerChange } = this.props;
-		return (
-			<div>
-				<TextField
-					className={classes.root}
-					multiline
-					id={'outlined-basic'}
-					label={label}
-					margin={'normal'}
-					variant={'outlined'}
-					rows={rows}
-					value={value}
-					onChange={handlerChange}
-				/>
-			</div>
-		);
-	}
+function TodoTextfield({
+	classes,
+	label,
+	rows,
+	value,
+	handlerChange,
+	changeOnKeyEnter,
+	emptyChange,
+	InputProps,
+	rest,
+}) {
+	return (
+		<div>
+			<TextField
+				className={classes.root}
+				multiline
+				id={'outlined-basic'}
+				label={label}
+				margin={'normal'}
+				variant={'outlined'}
+				rows={rows}
+				value={value}
+				onChange={handlerChange}
+
+				InputProps={{
+					onKeyDown: event => {
+						if (changeOnKeyEnter && event.key === 'Enter') {
+							if (emptyChange || event.target.value) {
+								changeOnKeyEnter(event);
+							}
+						}
+					}
+				}}
+			/>
+		</div>
+	);
 }
 
 TodoTextfield.propTypes = {

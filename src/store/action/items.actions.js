@@ -28,3 +28,12 @@ export const changeItem = item => (dispatch) => {
 		},
 	});
 };
+
+export const changeItemContent = (data) => (dispatch) => {
+	dispatch({
+		type: Actions.CHANGE_ITEM_CONTENT,
+		payload: {
+			content: data,
+		}
+	})
+}

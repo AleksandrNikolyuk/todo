@@ -16,16 +16,18 @@ const styles = () => ({
 	},
 });
 
-class TodoMenu extends Component {
-	render() {
-		const { classes, t } = this.props;
-		return (
-			<div className={classes.root}>
-				<h1>{t('title')}</h1>
-				<TodoLang/>
-			</div>
-		);
-	}
+function TodoMenu({
+	classes,
+	t
+}) {
+	
+	return (
+		<div className={classes.root}>
+			<h1>{t('title')}</h1>
+			<TodoLang/>
+		</div>
+	);
+	
 }
 
 TodoMenu.defaultProps = {

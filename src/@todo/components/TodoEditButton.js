@@ -16,23 +16,23 @@ const styles = () => ({
     },
 });
 
-class TodoEditButton extends Component {
-	render() {
-		const { classes, clickHandler } = this.props;
-		return (
-			<div className={classes.root}>
+function TodoEditButton({
+	classes,
+	clickHandler
+}) {
+	return (
+		<div className={classes.root}>
 
-                <Fab
-                    variant="outlined"
-                    aria-label="edit"
-                    onClick={clickHandler}
-					className={classes.button}
-                >
-                    <EditIcon />
-                </Fab>
-			</div>
-		);
-	}
+			<Fab
+				variant="outlined"
+				aria-label="edit"
+				onClick={clickHandler}
+				className={classes.button}
+			>
+				<EditIcon />
+			</Fab>
+		</div>
+	);
 }
 
 TodoEditButton.propTypes = {

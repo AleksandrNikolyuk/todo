@@ -14,18 +14,16 @@ const styles = () => ({
 	},
 });
 
-class TodoLayout extends Component {
-	render() {
-		const { classes } = this.props;
 
-		return (
-			<div className={classes.root}>
-				<TodoMenu/>
-				<TodoItemsContainer/>
-				<TodoCommentsContainer/>
-			</div>
-		);
-	}
+function TodoLayout({classes}) {
+	
+	return (
+		<div className={classes.root}>
+			<TodoMenu/>
+			<TodoItemsContainer/>
+			<TodoCommentsContainer/>
+		</div>
+	);
 }
 
 TodoLayout.propTypes = {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core';
@@ -18,39 +18,40 @@ const styles = () => ({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 	},
+	editField: {
+		width: '500px',
+	},
 });
 
-class TodoComments extends Component {
+function TodoComments({
+	t,
+	classes,
+	addComment,
+}) {
 
-	state = {
-		newComment: '',
+	const [newComment, setComment] = useState('');
+
+	const handleAddComment = e => {
+		setComment( e.target.value );
+	}; 
+
+	const handleSubmit = () => {
+		addComment(newComment);
+		setComment(' ');
 	};
-
-	handleAddComment = e => {
-		this.setState({ newComment: e.target.value });
-	};
-
-	handleSubmit = () => {
-		const { newComment } = this.state;
-		this.props.addComment(newComment);
-		this.setState({ newComment: '' });
-	};
-
-	render() {
-		const { newComment } = this.state;
-		const { classes, t } = this.props;
-		const { handleAddComment, handleSubmit } = this;
 		return (
 			<div className={classes.root}>
 				<h1>{t('comments')}</h1>
 				<div className={classes.commentBlock}>
 					<TodoImage/>
-					<TodoTextfield
-						value={newComment}
-						label={t('comments')}
-						handlerChange={handleAddComment}
-						rows={4}
-					/>
+					<div className={classes.editField}>
+						<TodoTextfield
+							value={newComment}
+							label={t('comments')}
+							handlerChange={handleAddComment}
+							rows={4}
+						/>
+					</div>
 				</div>
 				<TodoButton
 					label={t('buttons.addNew')}
@@ -58,7 +59,7 @@ class TodoComments extends Component {
 				/>
 			</div>
 		);
-	}
+	// }
 }
 
 TodoComments.propTypes = {

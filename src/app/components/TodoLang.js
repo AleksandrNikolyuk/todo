@@ -15,14 +15,13 @@ const styles = () => ({
 	},
 });
 
-class TodoLang extends Component {
 
-	handleChange = (e) => {
+function TodoLang({classes, t}) {
+
+	const handleChange = (e) => {
 		i18n.changeLanguage(e.target.value);
 	};
 
-	render() {
-		const { classes, t } = this.props;
 		return (
 			<FormControl className={classes.root}>
 				<InputLabel>{t('buttons.languages')}</InputLabel>
@@ -31,14 +30,13 @@ class TodoLang extends Component {
 					inputProps={{
 						name: 'Language',
 					}}
-					onChange={this.handleChange}
+					onChange={handleChange}
 				>
 					<option value={'ru'}>{t('Russian')}</option>
 					<option value={'en'}>{t('English')}</option>
 				</Select>
 			</FormControl>
 		);
-	}
 }
 
 TodoLang.defaultProps = {

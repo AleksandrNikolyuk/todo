@@ -14,22 +14,23 @@ const styles = () => ({
 	},
 });
 
-class TodoDelButton extends Component {
-	render() {
-		const { classes, label, clickHandler } = this.props;
-		return (
-			<div className={classes.root}>
-				<Button
-					variant={'outlined'}
-					color={'secondary'}
-					onClick={clickHandler}
-					className={classes.button}
-				>
-					{label}
-				</Button>
-			</div>
-		);
-	}
+function TodoDelButton({
+	classes,
+	label,
+	clickHandler
+}) {
+	return (
+		<div className={classes.root}>
+			<Button
+				variant={'outlined'}
+				color={'secondary'}
+				onClick={clickHandler}
+				className={classes.button}
+			>
+				{label}
+			</Button>
+		</div>
+	);
 }
 
 TodoDelButton.propTypes = {

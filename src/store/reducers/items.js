@@ -15,6 +15,13 @@ export default (state = initialState, { type, payload }) => {
 				...state.filter(item => item.id !== payload.id),
 			];
 		}
+		case Actions.CHANGE_ITEM_CONTENT: {
+			
+			return [
+				...state.map(e => e.id === payload.id ?  e.content : null),
+				payload
+			];
+		}
 		default:
 			return state;
 	}
