@@ -16,11 +16,12 @@ export default (state = initialState, { type, payload }) => {
 			];
 		}
 		case Actions.CHANGE_ITEM_CONTENT: {
-			
-			return [
-				...state.map(e => e.id === payload.id ?  e.content : null),
-				payload
-			];
+			return state.map( item => {
+				if( payload.id === item.id ){
+				item.content = payload.content;
+				}
+				return item;
+			});
 		}
 		default:
 			return state;

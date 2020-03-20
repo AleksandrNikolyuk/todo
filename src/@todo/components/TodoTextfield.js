@@ -20,8 +20,6 @@ function TodoTextfield({
 	handlerChange,
 	changeOnKeyEnter,
 	emptyChange,
-	InputProps,
-	rest,
 }) {
 	return (
 		<div>

@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core';
 import { withTranslation } from 'react-i18next';
@@ -33,7 +33,7 @@ const styles = () => ({
 function TodoItem({
 	t,
 	classes,
-	addItem 
+	addItem,
 }) {
 
 	const [newItem, setAddItem] = useState('')
@@ -56,6 +56,9 @@ function TodoItem({
 							value={newItem}
 							handlerChange={handleAddItem}
 							label={t('user')}
+							changeOnKeyEnter={event => {
+								handleSubmit()
+							}}
 						/>
 					</div>
 					<TodoButton
@@ -86,7 +89,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	addItem: (data) => {
+	addItem: (data, item) => {
 		dispatch(addItem(data));
 	},
 });

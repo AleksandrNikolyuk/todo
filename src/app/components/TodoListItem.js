@@ -6,7 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import * as Actions from 'store/action';
-import { addItem, changeItemContent} from 'store/action';
 import { TodoDelButton, TodoEditButton, TodoTextfield } from '@todo';
 
 const styles = () => ({
@@ -67,7 +66,6 @@ function TodoListItem({
 	items,
 	selectedItem,
 	comments,
-	addItem,
 	changeItemContent,
 }) {
 	
@@ -78,10 +76,11 @@ function TodoListItem({
 		setState ({
 			id, content
 		})
+		setNewState(content)
 	}
 
-	const handleSubmit = () => {
-		changeItemContent(newstate);
+	const handleSubmit = (id) => {
+		changeItemContent(newstate, id);
 		setNewState('')
 	};
 
@@ -117,21 +116,21 @@ function TodoListItem({
 									className={classes.title}
 									onDoubleClick={() => {
 										activeEditItem(item.id, item.content)
-
 									}}
 								>
 									{state.content == item.content && state.id == item.id
 										? (
 											<div className={classes.editField}>
-											<TodoTextfield
-												value={newstate}
-												handlerChange={handleAddItem}
-												label={t('user')}
-												changeOnKeyEnter={event => {
-													endEditItem();
-													handleSubmit()
-												}}
-											/></div>
+												<TodoTextfield
+													value={newstate}
+													handlerChange={handleAddItem}
+													label={t('user')}
+													changeOnKeyEnter={event => {
+														endEditItem();
+														handleSubmit(item.id)
+													}}
+												/>
+											</div>
 										)
 										: (
 											<div>{item.content}</div>
@@ -185,6 +184,7 @@ TodoListItem.propTypes = {
 	t: PropTypes.func,
 	deleteItem: PropTypes.func,
 	changeItem: PropTypes.func,
+	changeItemContent: PropTypes.func,
 };
 
 const mapStateToProps = ({ items, selected, comments }) => ({
@@ -194,14 +194,15 @@ const mapStateToProps = ({ items, selected, comments }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+	
 	deleteItem: (id) => () => {
 		dispatch(Actions.deletItem(id));
 	},
 	changeItem: (id) => () => {
 		dispatch(Actions.changeItem(id));
 	},
-	changeItemContent: (data) => {
-		dispatch(changeItemContent(data));
+	changeItemContent: (item, id) => {
+		dispatch(Actions.changeItemContent(item, id));
 	},
 });
 
