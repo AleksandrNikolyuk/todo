@@ -118,7 +118,7 @@ function TodoListItem({
 										activeEditItem(item.id, item.content)
 									}}
 								>
-									{state.content == item.content && state.id == item.id
+									{state.content === item.content && state.id === item.id
 										? (
 											<div className={classes.editField}>
 												<TodoTextfield

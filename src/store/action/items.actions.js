@@ -1,7 +1,7 @@
 import * as Actions from './index';
 import uniqid from 'uniqid';
 
-export const addItem = data => (dispatch) => {
+export const addItem = (data) => (dispatch) => {
 	dispatch({
 		type: Actions.ADD_ITEM,
 		payload: {

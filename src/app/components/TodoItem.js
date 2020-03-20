@@ -89,7 +89,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	addItem: (data, item) => {
+	addItem: (data) => {
 		dispatch(addItem(data));
 	},
 });
