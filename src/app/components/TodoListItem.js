@@ -99,10 +99,11 @@ function TodoListItem({
 		>
 			<ul className={classes.root}>
 				{items.length !== 0 && items.map(item => {
-					const select = selectedItem === item.id
+					
+					const select = selectedItem === item.id 
 						? classes.selectedItem
 						: '';
-
+					
 					const commentsCount = comments.filter(comment => comment.itemId.some(id => id === item.id));
 
 					return (

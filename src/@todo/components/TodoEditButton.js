@@ -24,7 +24,7 @@ function TodoEditButton({
 		<div className={classes.root}>
 
 			<Fab
-				variant="outlined"
+				variant="round"
 				aria-label="edit"
 				onClick={clickHandler}
 				className={classes.button}

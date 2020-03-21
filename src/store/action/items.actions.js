@@ -2,13 +2,15 @@ import * as Actions from './index';
 import uniqid from 'uniqid';
 
 export const addItem = (data) => (dispatch) => {
+	const newItem = {
+		id: uniqid(),
+		content: data,
+	};
 	dispatch({
 		type: Actions.ADD_ITEM,
-		payload: {
-			id: uniqid(),
-			content: data,
-		},
+		payload: newItem
 	});
+	dispatch(changeItem(newItem.id))
 };
 
 export const deletItem = id => (dispatch) => {
